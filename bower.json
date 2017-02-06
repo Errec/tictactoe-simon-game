@@ -1,0 +1,28 @@
+{
+  "name": "tictactoe-simon-game",
+  "description": "Web app with 2 games in one: Tic Tac Toe and Simon",
+  "main": "gulpfile.js",
+  "authors": [
+    "Errec"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "tic-tac-toe",
+    "simon",
+    "webapp",
+    "fcc",
+    "freecodecamp"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "js/vendor/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1"
+  }
+}
