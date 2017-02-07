@@ -1,0 +1,5 @@
+mixin table-row(id, size)
+  - var n = 1;
+  tr(id = 'tr-' + id)
+    while n < size + 1
+      td(id = ('td-' + id) + n++)=n-1
