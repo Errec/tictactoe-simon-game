@@ -1,5 +1,5 @@
 mixin table-row(id, size)
   - var n = 1;
-  tr(id = 'tr-' + id)
+  tr(class = 'tr' id = 'tr-' + id)
     while n < size + 1
-      td(id = ('td-' + id) + n++)=n-1
+      td(class = 'td' id = ('td-' + id) + n++)=n-1
