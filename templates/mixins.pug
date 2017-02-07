@@ -1,5 +1,7 @@
-mixin table-row(id, size)
-  - var n = 1;
-  tr(class = 'tr' id = 'tr-' + id)
-    while n < size + 1
-      td(class = 'td' id = ('td-' + id) + n++)=n-1
+mixin table-maker(tr_size, td_size)
+  - var ntr = 1
+  while ntr <= tr_size
+    tr(class = 'tr' id = ('tr-' + ntr++))
+      - var ntd = 1
+      while ntd <= td_size
+        td(class = 'td' id = ('td-' + (ntr-1)) + ntd++)=(ntr-1) + '' + (ntd-1)
