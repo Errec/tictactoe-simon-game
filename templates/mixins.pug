@@ -1,7 +1,47 @@
 mixin table-maker(tr_size, td_size)
   - var ntr = 1
   while ntr <= tr_size
-    tr(class = 'tr' id = ('tr-' + ntr++))
+    tr(class = 'tr' id = ('tr-' + ntr))
       - var ntd = 1
       while ntd <= td_size
-        td(class = 'td' id = ('td-' + (ntr-1)) + ntd++)=(ntr-1) + '' + (ntd-1)
+
+        if ntr === 2 && ntd === 4
+          td(class = 'td simon-l ttt-b' id = ('td-' + (ntr)) + ntd)=(ntr) + '' + (ntd)
+        if ntr === 3 && ntd === 3
+          td(class = 'td simon-b ttt-l' id = ('td-' + (ntr)) + ntd)=(ntr) + '' + (ntd)
+        if ntr === 3 && ntd === 5
+          td(class = 'td simon-b ttt-l' id = ('td-' + (ntr)) + ntd)=(ntr) + '' + (ntd)
+        if ntr === 4 && ntd === 4
+          td(class = 'td ttt-b simon-l' id = ('td-' + (ntr)) + ntd)=(ntr) + '' + (ntd)
+
+        if ntr === 3 && ntd === 4
+          td(class = 'td simon-b simon-l' id = ('td-' + (ntr)) + ntd)=(ntr) + '' + (ntd)
+
+        if ntr === 3 && ntd != 4 && ntd != 3 && ntd != 5
+          td(class = 'td simon-b' id = ('td-' + (ntr)) + ntd)=(ntr) + '' + (ntd)
+        if ntd === 4 && ntr != 3 && ntr != 2 && ntr != 4
+          td(class = 'td simon-l' id = ('td-' + (ntr)) + ntd)=(ntr) + '' + (ntd)
+
+        if ntr === 2 && ntd === 3
+          td(class = 'td ttt-b ttt-l' id = ('td-' + (ntr)) + ntd)=(ntr) + '' + (ntd)
+        if ntr === 2 && ntd === 5
+          td(class = 'td ttt-b ttt-l' id = ('td-' + (ntr)) + ntd)=(ntr) + '' + (ntd)
+        if ntr === 4 && ntd === 3
+          td(class = 'td ttt-b ttt-l' id = ('td-' + (ntr)) + ntd)=(ntr) + '' + (ntd)
+        if ntr === 4 && ntd === 5
+          td(class = 'td ttt-b ttt-l' id = ('td-' + (ntr)) + ntd)=(ntr) + '' + (ntd)
+
+        if ntr === 2 && (ntd != 3 && ntd != 5 && ntd != 4)
+          td(class = 'td ttt-b' id = ('td-' + (ntr)) + ntd)=(ntr) + '' + (ntd)
+        if ntr === 4 && (ntd != 3 && ntd != 5 && ntd != 4)
+          td(class = 'td ttt-b' id = ('td-' + (ntr)) + ntd)=(ntr) + '' + (ntd)
+        if ntd === 3 && (ntr != 2 && ntr != 4 && ntr != 3)
+          td(class = 'td ttt-l' id = ('td-' + (ntr)) + ntd)=(ntr) + '' + (ntd)
+        if ntd === 5 && (ntr != 2 && ntr != 4 && ntr != 3)
+          td(class = 'td ttt-l' id = ('td-' + (ntr)) + ntd)=(ntr) + '' + (ntd)
+
+        if ntr != 3 && ntd != 4 && ntr != 2 && ntr != 4 && ntd != 3 && ntd != 5
+          td(class = 'td' id = ('td-' + (ntr)) + ntd)=(ntr) + '' + (ntd)
+
+        - ntd++
+    - ntr++
