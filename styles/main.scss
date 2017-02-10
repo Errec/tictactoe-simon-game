@@ -1,6 +1,9 @@
 @import 'modules/normalize.scss'
 @import 'modules/reset.scss'
 
+@import 'state/simon.sass'
+@import 'state/ttt.sass'
+
 html, body
   height: 100%
 
