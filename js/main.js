@@ -1,10 +1,16 @@
 $(document).ready(function() {
+  var tttCard = {
+    openSpots: 0,
+    playerTurn: 'X',
+    playerXSpots: [],
+    playerOSpots: []
+  };
+
   $('.td').click(function() {
     if ($('.header__button').data('game') === 't') {
-      alert('ticatcatoe');
     } else {
-      alert('simon');
     }
     console.log(this.id);
   });
+
 });
