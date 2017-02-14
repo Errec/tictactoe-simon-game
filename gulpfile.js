@@ -39,8 +39,8 @@ gulp.task('styles', function() {
   .pipe(sourcemaps.init())
   .pipe(sass({indentedSyntax: true}))
   .pipe(autoprefixer({
-    browsers: ['last 5 versions'],
-    cascade: false}))
+    browsers : ['last 5 versions'],
+    cascade  : false}))
   .pipe(cleanCSS())
   .pipe(sourcemaps.write('.'))
   .pipe(rename({ suffix: '.min'}))
