@@ -1,15 +1,18 @@
-function tttManager(tttCard, clickedSpot) {
-  console.log(tttCard); // REMOVE
-  if (tttCard.playerXSpots.indexOf(clickedSpot) != -1 || tttCard.playerOSpots.indexOf(clickedSpot) != -1) {
+function tttManager(card, clickedSpot) {
+  console.log(card); // REMOVE
+  if (card.playerXSpots.indexOf(clickedSpot) != -1 || card.playerOSpots.indexOf(clickedSpot) != -1) {
     alert("item already checked"); // REMOVE
     return;
-  } else if (tttCard.playerTurn === 'X') {
-    tttCard.playerXSpots.push(clickedSpot);
+  } else if (card.playerTurn === 'X') {
+    card.playerXSpots.push(clickedSpot);
   } else {
-    tttCard.playerOSpots.push(clickedSpot);
+    card.playerOSpots.push(clickedSpot);
   }
-  tttCard.openSpots--;
-  tttCard.playerTurn === 'X' ? tttCard.playerTurn = 'O' : tttCard.playerTurn = 'X';
+if (--card.openSpots === 0) {
+  alert("its a draw"); // REMOVE
+  return;
+}
+  card.playerTurn === 'X' ? card.playerTurn = 'O' : card.playerTurn = 'X';
 }
 
 $(document).ready(function() {
