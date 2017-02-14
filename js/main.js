@@ -8,6 +8,8 @@ function tttManager(tttCard, clickedSpot) {
   } else {
     tttCard.playerOSpots.push(clickedSpot);
   }
+  tttCard.openSpots--;
+  tttCard.playerTurn === 'X' ? tttCard.playerTurn = 'O' : tttCard.playerTurn = 'X';
 }
 
 $(document).ready(function() {
