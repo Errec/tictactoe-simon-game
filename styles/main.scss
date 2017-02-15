@@ -9,7 +9,7 @@ html, body
 
 body
   background-color: black
-  color: yellow
+  color: transparent
   margin: 0
 
 .main
@@ -26,3 +26,21 @@ body
   width: 220px
   height: 220px
   font-size: 1.4em
+
+.td
+  user-select: none
+  cursor: default
+
+.x
+    position: absolute
+    width: 74px;
+    height: 74px;
+    background: url('../img/x.png') no-repeat 5px 5px;
+    background-size: 80%
+
+.o
+    position: absolute
+    width: 74px;
+    height: 74px;
+    background: url('../img/o.png') no-repeat 5px 5px;
+    background-size: 80%
