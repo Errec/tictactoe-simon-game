@@ -1,16 +1,32 @@
 function tttManager(t, clickedSpot) {
   var spotGroup = convertClickedSpot(clickedSpot);
-  if (t.playerXSpots.indexOf(spotGroup) != -1 || t.playerOSpots.indexOf(spotGroup) != -1) {
+  if (t.playerXSpots.indexOf(spotGroup) > -1 || t.playerOSpots.indexOf(spotGroup) > -1) {
     alert("item already checked"); // REMOVE
     return;
   } else if (t.playerTurn === 'X') {
     t.playerXSpots.push(spotGroup);
+    if (t.openSpots < 6) {
+      if (checkForWin(t.playerXSpots)) {
+        alert('X win');
+        t.score.X++;
+        tttReset(t);
+        return;
+      }
+    }
   } else {
     t.playerOSpots.push(spotGroup);
+    if (t.openSpots < 6) {
+      if (checkForWin(t.playerOSpots)) {
+        alert('O win');
+        t.score.O++;
+        tttReset(t);
+        return;
+      }
+    }
   }
 
   if (--t.openSpots === 0) {
-    alert("its a drawn"); // REMOVE
+    alert("its a draw"); // REMOVE
     tttReset(t);
     return;
   }
@@ -68,6 +84,28 @@ function convertClickedSpot(p) {
   }
 }
 
+function checkForWin(playerArr) {
+  var win = false;
+  var winArr = [['T1', 'T2', 'T3'],
+                ['M1', 'M2', 'M3'],
+                ['B1', 'B2', 'B3'],
+                ['T1', 'M2', 'B3'],
+                ['T1', 'M1', 'B1'],
+                ['T2', 'M2', 'B2'],
+                ['T3', 'M3', 'B3'],
+                ['B1', 'M2', 'T3']];
+
+  for (var i = 0; i < winArr.length; i++) {
+    win = playerArr.filter(function (elem) {
+      return winArr[i].indexOf(elem) > -1;
+    }).length === winArr[i].length;
+    if(win) {
+      break;
+    }
+  }
+  return win;
+}
+
 function tttReset(t) {
   t.openSpots    = 9;
   t.playerTurn   = 'X';
@@ -80,7 +118,11 @@ $(document).ready(function() {
     openSpots    : 9,
     playerTurn   : 'X',
     playerXSpots : [],
-    playerOSpots : []
+    playerOSpots : [],
+    score        : {
+      X: 0,
+      O: 0
+    }
   };
 
   $('.td').click(function() {
