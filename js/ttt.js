@@ -1,12 +1,14 @@
 function tttManager(t, clickedSpot) {
-  var xsvg = '<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="xMaxYMax" viewBox="0 0 3400 3400"><g fill="#FFFFFF" stroke="none"><path d="M220 2335 l-225 -225 413 -413 412 -412 -410 -410 c-225 -225 -410 -414 -410 -420 0 -13 448 -461 454 -455 3 3 186 186 408 407 222 222 411 403 418 403 8 0 198 -183 422 -407 l408 -408 225 225 c124 124 225 229 225 235 0 6 -185 195 -410 420 l-410 410 412 412 413 413 -225 225 c-124 124 -229 225 -235 225 -5 0 -193 -183 -417 -407 l-407 -407 -409 407 c-225 224 -413 407 -418 407 -5 0 -110 -101 -234 -225z"/></g></svg>';
-  var osvg = '<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="xMaxYMax" viewBox="0 0 3400 3400"><g fill="#FFFFFF" stroke="none"><path d="M1090 2545 c-52 -7 -140 -28 -195 -45 -434 -139 -758 -493 -861 -940 -25 -107 -30 -378 -10 -500 45 -263 157 -482 349 -678 174 -177 359 -285 584 -341 373 -93 758 -24 1069 191 91 62 265 241 326 333 146 224 208 437 208 716 0 278 -64 493 -214 718 -75 113 -239 278 -342 344 -282 182 -581 248 -914 202z m404 -331 c289 -73 524 -261 651 -519 75 -153 90 -223 90 -415 0 -142 -3 -176 -23 -245 -96 -332 -364 -596 -691 -682 -133 -35 -325 -37 -456 -4 -297 72 -558 302 -674 593 -83 209 -80 471 7 696 96 249 347 477 612 555 119 36 110 35 274 36 104 1 166 -4 210 -15z"/></g></svg>'
+  var xsvg1 = '<svg class= "ttt-svg x-svg" version="1.0" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="xMaxYMax" viewBox="0 0 3400 3400"><g class="svg-curve" id="';
+  var xsvg2 = '" fill="#FFFFFF" stroke="none"><path d="M220 2335 l-225 -225 413 -413 412 -412 -410 -410 c-225 -225 -410 -414 -410 -420 0 -13 448 -461 454 -455 3 3 186 186 408 407 222 222 411 403 418 403 8 0 198 -183 422 -407 l408 -408 225 225 c124 124 225 229 225 235 0 6 -185 195 -410 420 l-410 410 412 412 413 413 -225 225 c-124 124 -229 225 -235 225 -5 0 -193 -183 -417 -407 l-407 -407 -409 407 c-225 224 -413 407 -418 407 -5 0 -110 -101 -234 -225z"/></g></svg>';
+  var osvg1 = '<svg class= "ttt-svg o-svg" version="1.0" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="xMaxYMax" viewBox="0 0 3400 3400"><g class="svg-curve" id="';
+  var osvg2 = '" fill="#FFFFFF" stroke="none"><path d="M1090 2545 c-52 -7 -140 -28 -195 -45 -434 -139 -758 -493 -861 -940 -25 -107 -30 -378 -10 -500 45 -263 157 -482 349 -678 174 -177 359 -285 584 -341 373 -93 758 -24 1069 191 91 62 265 241 326 333 146 224 208 437 208 716 0 278 -64 493 -214 718 -75 113 -239 278 -342 344 -282 182 -581 248 -914 202z m404 -331 c289 -73 524 -261 651 -519 75 -153 90 -223 90 -415 0 -142 -3 -176 -23 -245 -96 -332 -364 -596 -691 -682 -133 -35 -325 -37 -456 -4 -297 72 -558 302 -674 593 -83 209 -80 471 7 696 96 249 347 477 612 555 119 36 110 35 274 36 104 1 166 -4 210 -15z"/></g></svg>';
   var spotGroup = convertClickedSpot(clickedSpot);
   if (t.playerXSpots.indexOf(spotGroup.g) > -1 || t.playerOSpots.indexOf(spotGroup.g) > -1) {
     return;
   } else if (t.playerTurn === 'X') {
     t.playerXSpots.push(spotGroup.g);
-    $('#' + spotGroup.tdRef).prepend("<div class='x'>" + xsvg + "</div>");
+    $('#' + spotGroup.tdRef).prepend("<div class='x'>" + xsvg1 + spotGroup.g + xsvg2 + "</div>");
     if (t.openSpots < 6) {
       if (checkForWin(t.playerXSpots)) {
         t.score.X++;
@@ -16,7 +18,7 @@ function tttManager(t, clickedSpot) {
     }
   } else {
     t.playerOSpots.push(spotGroup.g);
-    $('#' + spotGroup.tdRef).prepend("<div class='x'>" + osvg + "</div>");
+    $('#' + spotGroup.tdRef).prepend("<div class='x'>" + osvg1 + spotGroup.g + osvg2 + "</div>");
     if (t.openSpots < 6) {
       if (checkForWin(t.playerOSpots)) {
         t.score.O++;
@@ -27,6 +29,7 @@ function tttManager(t, clickedSpot) {
   }
 
   if (--t.openSpots === 0) {
+    $('.svg-curve').addClass('make-red');
     tttReset(t);
     return;
   }
@@ -101,6 +104,9 @@ function checkForWin(playerArr) {
       return winArr[i].indexOf(elem) > -1;
     }).length === winArr[i].length;
     if(win) {
+      $('#' + winArr[i][0]).addClass("make-green");
+      $('#' + winArr[i][1]).addClass("make-green");
+      $('#' + winArr[i][2]).addClass("make-green");
       break;
     }
   }
