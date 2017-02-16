@@ -33,7 +33,7 @@ function tttManager(t, clickedSpot) {
     tttReset(t);
     return;
   }
-  console.log(t); // REMOVE
+
   t.playerTurn === 'X' ? t.playerTurn = 'O' : t.playerTurn = 'X';
   return;
 }
