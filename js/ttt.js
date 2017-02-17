@@ -38,10 +38,10 @@ function tttManager(t, clickedSpot) {
   t.playerTurn === 'X' ? t.playerTurn = 'O' : t.playerTurn = 'X';
 
   if (t.playerTurn === 'X' && t.xType === 'machine') {
-    tttManager(t, pickSpot(t, t.playerOSpots, t.playerXSpots));
+    tttManager(t, convertToTd(pickSpot(t, t.playerOSpots, t.playerXSpots)));
   }
   if (t.playerTurn === 'O' && t.oType === 'machine') {
-    tttManager(t, pickSpot(t, t.playerXSpots, t.playerOSpots));
+    tttManager(t, convertToTd(pickSpot(t, t.playerXSpots, t.playerOSpots)));
   }
   return;
 }
@@ -122,16 +122,17 @@ function checkForWin(playerArr) {
 }
 
 function pickSpot(t, takenSpots, mySpots) {
-  var firstChoice  = ['td-11', 'td-15', 'td-51', 'td-55', 'td-33'];
-  var edges        = ['td-13', 'td-35', 'td-53', 'td-31'];
-  var corners      = ['td-11', 'td-15', 'td-51', 'td-55'];
-  var upCorners    = ['td-11', 'td-15'];
-  var downCorners  = ['td-51', 'td-55'];
-  var leftCorners  = ['td-11', 'td-51'];
-  var rightCorners = ['td-15', 'td-55'];
+  var edges        = ['T2', 'M3', 'B2', 'M1'];
+  var corners      = ['T1', 'T3', 'B1', 'B3'];
+  var upCorners    = ['T1', 'T3'];
+  var downCorners  = ['B1', 'B3'];
+  var leftCorners  = ['T1', 'B1'];
+  var rightCorners = ['T3', 'B3'];
+  var center       = ['M2'];
+  var allGroups    = edges.concat(corners.concat(center));
 
   if (t.openSpots === 9) {
-    return firstChoice[Math.floor(Math.random()*firstChoice.length)];
+    return corners.concat(center)[Math.floor(Math.random()*corners.concat(center).length)];
   }
 
   if (t.openSpots === 8) {
@@ -142,7 +143,7 @@ function pickSpot(t, takenSpots, mySpots) {
       case 'T3':
       case 'B1':
       case 'B3':
-        return 'td-33';
+        return 'M2';
       case 'T2':
         return upCorners[Math.round(Math.random())];
       case 'B2':
@@ -159,13 +160,13 @@ function pickSpot(t, takenSpots, mySpots) {
       case 'M2':
         switch (mySpots[0]) {
           case 'T1':
-            return 'td-55';
+            return 'B3';
           case 'T3':
-            return 'td-51';
+            return 'B1';
           case 'B1':
-            return 'td-15';
+            return 'T3';
           case 'B3':
-            return 'td-11';
+            return 'T1';
         }
         break;
       case 'T1':
@@ -173,10 +174,21 @@ function pickSpot(t, takenSpots, mySpots) {
       case 'B1':
       case 'B3':
         if (mySpots[0] === 'M2') {
-          return pickRandom(t, allSpots);
+          return pickRandom(t, allGroups);
         } else {
-
+          return pickRandom(t, corners);
         }
+        break;
+      case 'T2':
+      case 'B2':
+      case 'M3':
+      case 'M1':
+      if (mySpots[0] === 'M2') {
+        return pickRandom(t, corners);
+      } else {
+        return 'M2';
+      }
+      break;
     }
   }
 }
@@ -185,11 +197,11 @@ function pickRandom(t, group) {
   currentOpenSpots = group.filter(function(elemen) {
     return t.playerXSpots.concat(t.playerOSpots).indexOf(elemen) === -1;
   });
-  return convertToTd(currentOpenSpots[Math.floor(Math.random()*currentOpenSpots.length)]);
+  return currentOpenSpots[Math.floor(Math.random()*currentOpenSpots.length)];
 }
 
-function convertToTd(groupPoint) {
-  switch (groupPoint) {
+function convertToTd(group) {
+  switch (group) {
     case 'T1':
       return 'td-11';
     case 'T2':
