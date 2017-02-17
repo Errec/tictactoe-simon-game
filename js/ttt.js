@@ -173,15 +173,16 @@ function pickSpot(t, takenSpots, mySpots) {
       case 'B1':
       case 'B3':
         if (mySpots[0] === 'M2') {
-          return pickRandom(t);
+          return pickRandom(t, allSpots);
+        } else {
+
         }
     }
   }
 }
 
-function pickRandom(t) {
-  allGroups = ['T1', 'T2', 'T3', 'M1', 'M2', 'M3', 'B1', 'B2', 'B3'];
-  currentOpenSpots = allGroups.filter(function(elemen) {
+function pickRandom(t, group) {
+  currentOpenSpots = group.filter(function(elemen) {
     return t.playerXSpots.concat(t.playerOSpots).indexOf(elemen) === -1;
   });
   return convertToTd(currentOpenSpots[Math.floor(Math.random()*currentOpenSpots.length)]);
