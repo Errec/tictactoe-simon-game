@@ -133,6 +133,26 @@ function pickSpot(t, takenSpots, mySpots) {
   if (t.openSpots === 9) {
     return firstChoice[Math.floor(Math.random()*firstChoice.length)];
   }
+
+  if (t.openSpots === 8) {
+    switch (takenSpots[0]) {
+      case 'M2':
+        return corners[Math.floor(Math.random()*corners.length)];
+      case 'T1':
+      case 'T3':
+      case 'B1':
+      case 'B3':
+        return 'td-33';
+      case 'T2':
+        return upCorners[Math.round(Math.random())];
+      case 'B2':
+        return downCorners[Math.round(Math.random())];
+      case 'M3':
+        return rightCorners[Math.round(Math.random())];
+      case 'M1':
+        return leftCorners[Math.round(Math.random())];
+    }
+  }
 }
 
 function tttReset(t) {
