@@ -4,6 +4,7 @@ function tttManager(t, clickedSpot) {
   var osvg1 = '<svg class= "ttt-svg o-svg" version="1.0" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="xMaxYMax" viewBox="0 0 3400 3400"><g class="svg-curve" id="';
   var osvg2 = '" fill="#FFFFFF" stroke="none"><path d="M1090 2545 c-52 -7 -140 -28 -195 -45 -434 -139 -758 -493 -861 -940 -25 -107 -30 -378 -10 -500 45 -263 157 -482 349 -678 174 -177 359 -285 584 -341 373 -93 758 -24 1069 191 91 62 265 241 326 333 146 224 208 437 208 716 0 278 -64 493 -214 718 -75 113 -239 278 -342 344 -282 182 -581 248 -914 202z m404 -331 c289 -73 524 -261 651 -519 75 -153 90 -223 90 -415 0 -142 -3 -176 -23 -245 -96 -332 -364 -596 -691 -682 -133 -35 -325 -37 -456 -4 -297 72 -558 302 -674 593 -83 209 -80 471 7 696 96 249 347 477 612 555 119 36 110 35 274 36 104 1 166 -4 210 -15z"/></g></svg>';
   var spotGroup = convertClickedSpot(clickedSpot);
+
   if (t.playerXSpots.indexOf(spotGroup.g) > -1 || t.playerOSpots.indexOf(spotGroup.g) > -1) {
     return;
   } else if (t.playerTurn === 'X') {
@@ -35,6 +36,13 @@ function tttManager(t, clickedSpot) {
   }
 
   t.playerTurn === 'X' ? t.playerTurn = 'O' : t.playerTurn = 'X';
+
+  if (t.playerTurn === 'X' && t.xType === 'machine') {
+    tttManager(t, pickSpot(t, t.playerOSpots, t.playerXSpots));
+  }
+  if (t.playerTurn === 'O' && t.oType === 'machine') {
+    tttManager(t, pickSpot(t, t.playerXSpots, t.playerOSpots));
+  }
   return;
 }
 
@@ -111,6 +119,17 @@ function checkForWin(playerArr) {
     }
   }
   return win;
+}
+
+function pickSpot(t, takenSpots, mySpots) {
+  var firstChoice  = ['td-11', 'td-15', 'td-51', 'td-55', 'td-33'];
+  var edges        = ['td-13', 'td-35', 'td-53', 'td-31'];
+  var corners      = ['td-11', 'td-15', 'td-51', 'td-55'];
+  var upCorners    = ['td-11', 'td-15'];
+  var downCorners  = ['td-51', 'td-55'];
+  var leftCorners  = ['td-11', 'td-51'];
+  var rightCorners = ['td-15', 'td-55'];
+
 }
 
 function tttReset(t) {
