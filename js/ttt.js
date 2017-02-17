@@ -172,8 +172,41 @@ function pickSpot(t, takenSpots, mySpots) {
       case 'T3':
       case 'B1':
       case 'B3':
-
+        if (mySpots[0] === 'M2') {
+          return pickRandom(t);
+        }
     }
+  }
+}
+
+function pickRandom(t) {
+  allGroups = ['T1', 'T2', 'T3', 'M1', 'M2', 'M3', 'B1', 'B2', 'B3'];
+  currentOpenSpots = allGroups.filter(function(elemen) {
+    return t.playerXSpots.concat(t.playerOSpots).indexOf(elemen) === -1;
+  });
+  return convertToTd(currentOpenSpots[Math.floor(Math.random()*currentOpenSpots.length)]);
+}
+
+function convertToTd(groupPoint) {
+  switch (groupPoint) {
+    case 'T1':
+      return 'td-11';
+    case 'T2':
+      return 'td-13';
+    case 'T3':
+      return 'td-15';
+    case 'M1':
+      return 'td-31';
+    case 'M2':
+      return 'td-33';
+    case 'M3':
+      return 'td-35';
+    case 'B1':
+      return 'td-51';
+    case 'B2':
+      return 'td-53';
+    case 'B3':
+      return 'td-55';
   }
 }
 
