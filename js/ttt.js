@@ -130,6 +130,9 @@ function pickSpot(t, takenSpots, mySpots) {
   var leftCorners  = ['td-11', 'td-51'];
   var rightCorners = ['td-15', 'td-55'];
 
+  if (t.openSpots === 9) {
+    return firstChoice[Math.floor(Math.random()*firstChoice.length)];
+  }
 }
 
 function tttReset(t) {
