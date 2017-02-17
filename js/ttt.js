@@ -156,7 +156,7 @@ function pickSpot(t, takenSpots, mySpots) {
   }
 
   if (t.openSpots === 7) {
-    switch (takenSpots[1]) {
+    switch (takenSpots[0]) {
       case 'M2':
         switch (mySpots[0]) {
           case 'T1':
@@ -189,6 +189,28 @@ function pickSpot(t, takenSpots, mySpots) {
             return 'M2';
           }
         break;
+    }
+  }
+
+  if (t.openSpots === 6) {
+    checkTwoInRow();
+    switch (mySpots[0]) {
+      case 'M2':
+        if (takenSpots[1].indexOf(corners) > -1) {
+          return pickRandom(t, edges);
+        } else {
+          return pickRandom(t, allGroups);
+        }
+        break;
+      case 'T1':
+      case 'T3':
+      case 'B1':
+      case 'B3':
+        if ('M2'.indexOf(takenSpots) > -1) {
+          return pickRandom(t, corners);
+        } else {
+          return  'M2';
+        }
     }
   }
 }
