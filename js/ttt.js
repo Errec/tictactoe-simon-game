@@ -153,6 +153,28 @@ function pickSpot(t, takenSpots, mySpots) {
         return leftCorners[Math.round(Math.random())];
     }
   }
+
+  if (t.openSpots === 7) {
+    switch (takenSpots[1]) {
+      case 'M2':
+        switch (mySpots[0]) {
+          case 'T1':
+            return 'td-55';
+          case 'T3':
+            return 'td-51';
+          case 'B1':
+            return 'td-15';
+          case 'B3':
+            return 'td-11';
+        }
+        break;
+      case 'T1':
+      case 'T3':
+      case 'B1':
+      case 'B3':
+
+    }
+  }
 }
 
 function tttReset(t) {
