@@ -44,6 +44,14 @@ function pickSpot(t, takenSpots, mySpots) {
             return 'T3';
           case 'B3':
             return 'T1';
+          case 'T2':
+            return upCorners[Math.round(Math.random())];
+          case 'B2':
+            return downCorners[Math.round(Math.random())];
+          case 'M3':
+            return rightCorners[Math.round(Math.random())];
+          case 'M1':
+            return leftCorners[Math.round(Math.random())];
         }
         break;
       case 'T1':
@@ -61,7 +69,17 @@ function pickSpot(t, takenSpots, mySpots) {
       case 'M3':
       case 'M1':
         if (mySpots[0] === 'M2') {
-          return pickRandom(t, corners);
+          switch (takenSpots[0]) {
+            case 'T2':
+              return upCorners[Math.round(Math.random())];
+            case 'B2':
+              return downCorners[Math.round(Math.random())];
+            case 'M3':
+              return rightCorners[Math.round(Math.random())];
+            case 'M1':
+              return leftCorners[Math.round(Math.random())];
+          }
+          break;
         } else {
             return 'M2';
           }
@@ -77,7 +95,7 @@ function pickSpot(t, takenSpots, mySpots) {
 
     switch (mySpots[0]) {
       case 'M2':
-        if (takenSpots[1].indexOf(corners) > -1) {
+        if (corners.indexOf(takenSpots[1]) > -1) {
           return pickRandom(t, edges);
         } else {
           return pickRandom(t, allGroups);
@@ -87,7 +105,7 @@ function pickSpot(t, takenSpots, mySpots) {
       case 'T3':
       case 'B1':
       case 'B3':
-        if ('M2'.indexOf(takenSpots) === -1) {
+        if (takenSpots.indexOf('M2') > -1) {
           return pickRandom(t, corners);
         } else {
           return  'M2';
@@ -101,13 +119,10 @@ function pickSpot(t, takenSpots, mySpots) {
   if (t.openSpots < 6) {
     nextMove = twoInRow(takenSpots, mySpots);
     if (nextMove.attack !== null) {
-      console.log('attack ok');
       return nextMove.attack;
     } else if (nextMove.defense !== null) {
-      console.log('defense ok');
       return nextMove.defense;
     } else {
-      console.log('just random');
       return pickRandom(t, allGroups);
     }
   }
@@ -163,7 +178,6 @@ function twoInRow(takenSpots, mySpots) {
     verifyOponentRow = winArr[i].filter(function (elem) {
       return takenSpots.indexOf(elem) === -1;
     });
-    console.log(verifyOponentRow + ' length: ' + verifyOponentRow.length + ' , index: ' + verifyOponentRow[0].indexOf(mySpots));
     if (verifyOponentRow.length === 1 && mySpots.indexOf(verifyOponentRow[0]) === -1) {
       completeTheRow.defense = verifyOponentRow[0];
       break;
@@ -173,7 +187,6 @@ function twoInRow(takenSpots, mySpots) {
     verifyMyRow = winArr[i].filter(function (elem) {
       return mySpots.indexOf(elem) === -1;
     });
-    console.log(verifyMyRow  + ' length: ' + verifyMyRow.length + ' , index: ' + verifyMyRow[0].indexOf(takenSpots));
     if (verifyMyRow.length === 1 && takenSpots.indexOf(verifyMyRow[0]) === -1) {
       completeTheRow.attack = verifyMyRow[0];
       break;
