@@ -70,7 +70,7 @@ function pickSpot(t, takenSpots, mySpots) {
   }
 
   if (t.openSpots === 6) {
-    var defend = checkTwoInRow(takenSpots, mySpots).defense;
+    var defend = twoInRow(takenSpots, mySpots).defense;
     if (defend !== null) {
       return defend;
     }
@@ -87,13 +87,31 @@ function pickSpot(t, takenSpots, mySpots) {
       case 'T3':
       case 'B1':
       case 'B3':
-        if ('M2'.indexOf(takenSpots) > -1) {
+        if ('M2'.indexOf(takenSpots) === -1) {
           return pickRandom(t, corners);
         } else {
           return  'M2';
         }
+        break;
+      default:
+        return pickRandom(t, allGroups);
     }
   }
+
+  if (t.openSpots < 6) {
+    nextMove = twoInRow(takenSpots, mySpots);
+    if (nextMove.attack !== null) {
+      console.log('attack ok');
+      return nextMove.attack;
+    } else if (nextMove.defense !== null) {
+      console.log('defense ok');
+      return nextMove.defense;
+    } else {
+      console.log('just random');
+      return pickRandom(t, allGroups);
+    }
+  }
+
 }
 
 function pickRandom(t, group) {
@@ -129,7 +147,7 @@ function convertToTd(group) {
 function twoInRow(takenSpots, mySpots) {
   var completeTheRow = {
     defense : null,
-    atack   : null
+    attack   : null
   };
 
   var winArr = [['T1', 'T2', 'T3'],
@@ -145,17 +163,19 @@ function twoInRow(takenSpots, mySpots) {
     verifyOponentRow = winArr[i].filter(function (elem) {
       return takenSpots.indexOf(elem) === -1;
     });
-    if (verifyOponentRow.length === 1 && verifyOponentRow[0].indexOf(mySpots) === -1) {
+    console.log(verifyOponentRow + ' length: ' + verifyOponentRow.length + ' , index: ' + verifyOponentRow[0].indexOf(mySpots));
+    if (verifyOponentRow.length === 1 && mySpots.indexOf(verifyOponentRow[0]) === -1) {
       completeTheRow.defense = verifyOponentRow[0];
       break;
     }
   }
-    for (var i = 0; i < winArr.length; i++) {
+    for (i = 0; i < winArr.length; i++) {
     verifyMyRow = winArr[i].filter(function (elem) {
       return mySpots.indexOf(elem) === -1;
     });
-    if (verifyMyRow.length === 1 && verifyMyRow[0].indexOf(takenSpots) === -1) {
-      completeTheRow.atack = verifyMyRow[0];
+    console.log(verifyMyRow  + ' length: ' + verifyMyRow.length + ' , index: ' + verifyMyRow[0].indexOf(takenSpots));
+    if (verifyMyRow.length === 1 && takenSpots.indexOf(verifyMyRow[0]) === -1) {
+      completeTheRow.attack = verifyMyRow[0];
       break;
     }
   }

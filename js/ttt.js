@@ -1,4 +1,5 @@
 function tttManager(t, clickedSpot) {
+  $('.td').css('pointer-events', 'auto');
   var xsvg1 = '<svg class= "ttt-svg x-svg" version="1.0" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="xMaxYMax" viewBox="0 0 3400 3400"><g class="svg-curve" id="';
   var xsvg2 = '" fill="#FFFFFF" stroke="none"><path d="M220 2335 l-225 -225 413 -413 412 -412 -410 -410 c-225 -225 -410 -414 -410 -420 0 -13 448 -461 454 -455 3 3 186 186 408 407 222 222 411 403 418 403 8 0 198 -183 422 -407 l408 -408 225 225 c124 124 225 229 225 235 0 6 -185 195 -410 420 l-410 410 412 412 413 413 -225 225 c-124 124 -229 225 -235 225 -5 0 -193 -183 -417 -407 l-407 -407 -409 407 c-225 224 -413 407 -418 407 -5 0 -110 -101 -234 -225z"/></g></svg>';
   var osvg1 = '<svg class= "ttt-svg o-svg" version="1.0" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="xMaxYMax" viewBox="0 0 3400 3400"><g class="svg-curve" id="';
@@ -38,9 +39,11 @@ function tttManager(t, clickedSpot) {
   t.playerTurn === 'X' ? t.playerTurn = 'O' : t.playerTurn = 'X';
 
   if (t.playerTurn === 'X' && t.xType === 'machine') {
+    $('.td').css('pointer-events', 'none');
     tttManager(t, convertToTd(pickSpot(t, t.playerOSpots, t.playerXSpots)));
   }
   if (t.playerTurn === 'O' && t.oType === 'machine') {
+    $('.td').css('pointer-events', 'none');
     tttManager(t, convertToTd(pickSpot(t, t.playerXSpots, t.playerOSpots)));
   }
   return;

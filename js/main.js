@@ -1,8 +1,8 @@
 $(document).ready(function() {
   var tttData = {
     openSpots    : 9,
-    xType: 'human',
-    oType: 'human',
+    xType: 'machine',
+    oType: 'machine',
     playerTurn   : 'X',
     playerXSpots : [],
     playerOSpots : [],
