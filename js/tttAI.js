@@ -70,7 +70,11 @@ function pickSpot(t, takenSpots, mySpots) {
   }
 
   if (t.openSpots === 6) {
-    checkTwoInRow();
+    var defend = checkTwoInRow(takenSpots, mySpots).defense;
+    if (defend !== null) {
+      return defend;
+    }
+
     switch (mySpots[0]) {
       case 'M2':
         if (takenSpots[1].indexOf(corners) > -1) {
@@ -120,4 +124,41 @@ function convertToTd(group) {
     case 'B3':
       return 'td-55';
   }
+}
+
+function twoInRow(takenSpots, mySpots) {
+  var completeTheRow = {
+    defense : null,
+    atack   : null
+  };
+
+  var winArr = [['T1', 'T2', 'T3'],
+                ['M1', 'M2', 'M3'],
+                ['B1', 'B2', 'B3'],
+                ['T1', 'M2', 'B3'],
+                ['T1', 'M1', 'B1'],
+                ['T2', 'M2', 'B2'],
+                ['T3', 'M3', 'B3'],
+                ['B1', 'M2', 'T3']];
+
+    for (var i = 0; i < winArr.length; i++) {
+    verifyOponentRow = winArr[i].filter(function (elem) {
+      return takenSpots.indexOf(elem) === -1;
+    });
+    if (verifyOponentRow.length === 1 && verifyOponentRow[0].indexOf(mySpots) === -1) {
+      completeTheRow.defense = verifyOponentRow[0];
+      break;
+    }
+  }
+    for (var i = 0; i < winArr.length; i++) {
+    verifyMyRow = winArr[i].filter(function (elem) {
+      return mySpots.indexOf(elem) === -1;
+    });
+    if (verifyMyRow.length === 1 && verifyMyRow[0].indexOf(takenSpots) === -1) {
+      completeTheRow.atack = verifyMyRow[0];
+      break;
+    }
+  }
+
+  return completeTheRow;
 }
