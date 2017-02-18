@@ -117,11 +117,14 @@ function pickSpot(t, takenSpots, mySpots) {
   }
 
   if (t.openSpots < 6) {
-    nextMove = twoInRow(takenSpots, mySpots);
-    if (nextMove.attack !== null) {
-      return nextMove.attack;
-    } else if (nextMove.defense !== null) {
-      return nextMove.defense;
+    fillRow = twoInRow(takenSpots, mySpots);
+    addToRow = oneInRow(takenSpots, mySpots);
+    if (fillRow.attack !== null) {
+      return fillRow.attack;
+    } else if (fillRow.defense !== null) {
+      return fillRow.defense;
+    } else if(addToRow) {
+      return addToRow;
     } else {
       return pickRandom(t, allGroups);
     }
@@ -160,26 +163,17 @@ function convertToTd(group) {
 }
 
 function twoInRow(takenSpots, mySpots) {
-  var completeTheRow = {
+  var fillRow = {
     defense : null,
     attack   : null
   };
-
-  var winArr = [['T1', 'T2', 'T3'],
-                ['M1', 'M2', 'M3'],
-                ['B1', 'B2', 'B3'],
-                ['T1', 'M2', 'B3'],
-                ['T1', 'M1', 'B1'],
-                ['T2', 'M2', 'B2'],
-                ['T3', 'M3', 'B3'],
-                ['B1', 'M2', 'T3']];
 
     for (var i = 0; i < winArr.length; i++) {
     verifyOponentRow = winArr[i].filter(function (elem) {
       return takenSpots.indexOf(elem) === -1;
     });
     if (verifyOponentRow.length === 1 && mySpots.indexOf(verifyOponentRow[0]) === -1) {
-      completeTheRow.defense = verifyOponentRow[0];
+      fillRow.defense = verifyOponentRow[0];
       break;
     }
   }
@@ -188,10 +182,31 @@ function twoInRow(takenSpots, mySpots) {
       return mySpots.indexOf(elem) === -1;
     });
     if (verifyMyRow.length === 1 && takenSpots.indexOf(verifyMyRow[0]) === -1) {
-      completeTheRow.attack = verifyMyRow[0];
+      fillRow.attack = verifyMyRow[0];
       break;
     }
   }
 
-  return completeTheRow;
+  return fillRow;
 }
+
+function  oneInRow(takenSpots, mySpots) {
+
+  var openSpots = [];
+  for (var i = 0; i < winArr.length; i++) {
+
+    verifyOponentRow = winArr[i].filter(function (elem) {
+      return takenSpots.indexOf(elem) === -1;
+    });
+    verifyMyRow = verifyOponentRow.filter(function (elem) {
+      return mySpots.indexOf(elem) > -1;
+    });
+    if (verifyOponentRow.length === 2 && verifyMyRow.length === 0) {
+      openSpots = verifyOponentRow;
+      break;
+    }
+  }
+
+  return openSpots[Math.floor(Math.random()*openSpots.length)];
+}
+

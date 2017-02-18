@@ -1,7 +1,16 @@
+  var winArr = [['T1', 'T2', 'T3'],
+                ['M1', 'M2', 'M3'],
+                ['B1', 'B2', 'B3'],
+                ['T1', 'M2', 'B3'],
+                ['T1', 'M1', 'B1'],
+                ['T2', 'M2', 'B2'],
+                ['T3', 'M3', 'B3'],
+                ['B1', 'M2', 'T3']];
+
 $(document).ready(function() {
   var tttData = {
     openSpots    : 9,
-    xType: 'machine',
+    xType: 'human',
     oType: 'machine',
     playerTurn   : 'X',
     playerXSpots : [],
