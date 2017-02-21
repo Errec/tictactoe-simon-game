@@ -17,4 +17,10 @@ html(lang="en")
     main.main
       table.main__table
         +table-maker(6,6)
+      div.main__ttt-btn-wrapper
+        button.ttt-bt.main__ttt-bt-h(type="button" data-player='human') H
+          p.main__x-score 00
+        button.ttt-bt.main__ttt-bt-m(type="button" data-player='machine') M
+          p.main__o-score 00
+
   script(src="js/all.min.js")
