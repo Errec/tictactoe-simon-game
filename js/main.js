@@ -16,14 +16,17 @@ $(document).ready(function() {
     playerXSpots : [],
     playerOSpots : [],
     score        : {
-      X: 0,
-      O: 0
+      humanX: 0,
+      humanO: 0,
+      machineX: 0,
+      machineO: 0
     }
   };
 
   $('.td').click(function() {
     if ($('.header__button').data('game') === 't') {
       tttManager(tttData, this.id);
+      console.log(tttData);
     } else {
       alert('simon game!'); // REMOVE
     }

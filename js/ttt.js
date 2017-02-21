@@ -12,7 +12,7 @@ function tttManager(t, clickedSpot) {
     $('#' + spotGroup.tdRef).prepend("<div class='x'>" + xsvg1 + spotGroup.g + xsvg2 + "</div>");
     if (t.openSpots < 6) {
       if (checkForWin(t.playerXSpots)) {
-        t.score.X++;
+        t.xType === 'human' ? t.score.humanX++ : t.score.machineX++;
         tttReset(t);
         return;
       }
@@ -22,7 +22,7 @@ function tttManager(t, clickedSpot) {
     $('#' + spotGroup.tdRef).prepend("<div class='x'>" + osvg1 + spotGroup.g + osvg2 + "</div>");
     if (t.openSpots < 6) {
       if (checkForWin(t.playerOSpots)) {
-        t.score.O++;
+        t.oType === 'human' ? t.score.humanO++ : t.score.machineO++;
         tttReset(t);
         return;
       }
@@ -44,8 +44,8 @@ function tttManager(t, clickedSpot) {
     }, 500);
   }
   if (t.playerTurn === 'O' && t.oType === 'machine') {
-    setTimeout(function() {
     $('.td').css('pointer-events', 'none');
+    setTimeout(function() {
       tttManager(t, convertToTd(pickSpot(t, t.playerXSpots, t.playerOSpots)));
     }, 500);
   }
