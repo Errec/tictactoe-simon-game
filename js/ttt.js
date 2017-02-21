@@ -39,11 +39,15 @@ function tttManager(t, clickedSpot) {
 
   if (t.playerTurn === 'X' && t.xType === 'machine') {
     $('.td').css('pointer-events', 'none');
-    tttManager(t, convertToTd(pickSpot(t, t.playerOSpots, t.playerXSpots)));
+    setTimeout(function() {
+      tttManager(t, convertToTd(pickSpot(t, t.playerOSpots, t.playerXSpots)));
+    }, 500);
   }
   if (t.playerTurn === 'O' && t.oType === 'machine') {
+    setTimeout(function() {
     $('.td').css('pointer-events', 'none');
-    tttManager(t, convertToTd(pickSpot(t, t.playerXSpots, t.playerOSpots)));
+      tttManager(t, convertToTd(pickSpot(t, t.playerXSpots, t.playerOSpots)));
+    }, 500);
   }
   return;
 }
@@ -125,5 +129,5 @@ function tttReset(t) {
     $('.tr').find('.x').remove();
     $('.tr').find('.o').remove();
     $('.td').css('pointer-events', 'auto');
-  }, 500);
+  }, 1000);
 }
