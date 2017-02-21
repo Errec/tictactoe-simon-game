@@ -18,9 +18,16 @@ html(lang="en")
       table.main__table
         +table-maker(6,6)
       div.main__ttt-btn-wrapper
-        button.ttt-bt.main__ttt-bt-h(type="button" data-player='human') H
+        button.ttt-bt.main__ttt-bt-h(type="button" data-player='human')
+          img(src='img/x.svg')
           p.main__x-score 00
-        button.ttt-bt.main__ttt-bt-m(type="button" data-player='machine') M
+        button.ttt-bt.main__ttt-bt-m(type="button" data-player='machine')
+          img(src='img/o.svg')
           p.main__o-score 00
+      div.main__ttt-xo-icons
+        div.main__x-icon
+          img(src='')
+        div.main__o-icon
+          img(src='')
 
   script(src="js/all.min.js")
