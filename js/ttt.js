@@ -8,6 +8,7 @@ $('.main__ttt-bt-x').click(function() {
     $('.main__ttt-bt-x-img').attr('src', 'img/human.jpeg');
     updateScore(tttData);
   }
+  checkForMachine(tttData);
 });
 
 $('.main__ttt-bt-o').click(function() {
@@ -20,6 +21,7 @@ $('.main__ttt-bt-o').click(function() {
     $('.main__ttt-bt-o-img').attr('src', 'img/human.jpeg');
     updateScore(tttData);
   }
+  checkForMachine(tttData);
 });
 
 function tttManager(t, clickedSpot) {
@@ -70,19 +72,7 @@ function tttManager(t, clickedSpot) {
   }
 
   t.playerTurn === 'X' ? t.playerTurn = 'O' : t.playerTurn = 'X';
-
-  if (t.playerTurn === 'X' && t.xType === 'machine') {
-    $('.td').css('pointer-events', 'none');
-    setTimeout(function() {
-      tttManager(t, convertToTd(pickSpot(t, t.playerOSpots, t.playerXSpots)));
-    }, 350);
-  }
-  if (t.playerTurn === 'O' && t.oType === 'machine') {
-    $('.td').css('pointer-events', 'none');
-    setTimeout(function() {
-      tttManager(t, convertToTd(pickSpot(t, t.playerXSpots, t.playerOSpots)));
-    }, 350);
-  }
+  checkForMachine(t);
   return;
 }
 
@@ -167,7 +157,6 @@ function updateScore(t) {
   function n(n){
       return n > 9 ? "" + n: "0" + n;
   }
-
 }
 
 function tttReset(t) {
@@ -180,5 +169,22 @@ function tttReset(t) {
     $('.tr').find('.x').remove();
     $('.tr').find('.o').remove();
     $('.td').css('pointer-events', 'auto');
+    checkForMachine(tttData);
   }, 1000);
+
+}
+
+function checkForMachine (t) {
+  if (t.playerTurn === 'X' && t.xType === 'machine') {
+    $('.td').css('pointer-events', 'none');
+    setTimeout(function() {
+      tttManager(t, convertToTd(pickSpot(t, t.playerOSpots, t.playerXSpots)));
+    }, 350);
+  }
+  if (t.playerTurn === 'O' && t.oType === 'machine') {
+    $('.td').css('pointer-events', 'none');
+    setTimeout(function() {
+      tttManager(t, convertToTd(pickSpot(t, t.playerXSpots, t.playerOSpots)));
+    }, 350);
+  }
 }
