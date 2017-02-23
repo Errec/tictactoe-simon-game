@@ -7,21 +7,22 @@
                 ['T3', 'M3', 'B3'],
                 ['B1', 'M2', 'T3']];
 
+var tttData = {
+  openSpots    : 9,
+  xType: 'human',
+  oType: 'machine',
+  playerTurn   : 'X',
+  playerXSpots : [],
+  playerOSpots : [],
+  score        : {
+    humanX: 0,
+    humanO: 0,
+    machineX: 0,
+    machineO: 0
+  }
+};
+
 $(document).ready(function() {
-  var tttData = {
-    openSpots    : 9,
-    xType: 'human',
-    oType: 'machine',
-    playerTurn   : 'X',
-    playerXSpots : [],
-    playerOSpots : [],
-    score        : {
-      humanX: 0,
-      humanO: 0,
-      machineX: 0,
-      machineO: 0
-    }
-  };
 
   $('.td').click(function() {
     if ($('.header__button').data('game') === 't') {

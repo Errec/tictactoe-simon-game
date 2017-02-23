@@ -1,3 +1,27 @@
+$('.main__ttt-bt-x').click(function() {
+  if (tttData.xType === 'human') {
+    tttData.xType = 'machine';
+    $('.main__ttt-bt-x-img').attr('src', 'img/pc.png');
+    updateScore(tttData);
+  } else {
+    tttData.xType = 'human';
+    $('.main__ttt-bt-x-img').attr('src', 'img/human.jpeg');
+    updateScore(tttData);
+  }
+});
+
+$('.main__ttt-bt-o').click(function() {
+  if (tttData.oType === 'human') {
+    tttData.oType = 'machine';
+    $('.main__ttt-bt-o-img').attr('src', 'img/pc.png');
+    updateScore(tttData);
+  } else {
+    tttData.oType = 'human';
+    $('.main__ttt-bt-o-img').attr('src', 'img/human.jpeg');
+    updateScore(tttData);
+  }
+});
+
 function tttManager(t, clickedSpot) {
   $('.td').css('pointer-events', 'auto');
   var xsvg_1 = '<svg class= "ttt-svg x-svg" version="1.0" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="xMaxYMax" viewBox="0 0 3400 3400"><g class="svg-curve" id="';
