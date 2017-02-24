@@ -174,8 +174,8 @@ function updateScore(t) {
     return value;
   });
 
-  function n(n){
-      return n > 9 ? "" + n: "0" + n;
+  function n(n) {
+    return n > 9 ? "" + n: "0" + n;
   }
 }
 

@@ -24,6 +24,13 @@ var tttData = {
 
 $(document).ready(function() {
 
+  // simulate toggle btn
+  $('.ttt').hide();
+  $('.ttt-l').css('border-left', 'none');
+  $('.ttt-b').css('border-bottom', 'none');
+  $('.simon-l').css('border-left', 'solid white 2px');
+  $('.simon-b').css('border-bottom', 'solid white 2px');
+
   $('.td').click(function() {
     if ($('.header__button').data('game') === 't') {
       tttManager(tttData, this.id);
