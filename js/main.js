@@ -37,7 +37,7 @@ $(document).ready(function() {
       tttManager(tttData, this.id);
       console.log(tttData);
     } else {
-      alert('simon game!'); // REMOVE
+      simonManager(this.id);
     }
   });
 
