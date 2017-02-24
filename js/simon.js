@@ -1,5 +1,10 @@
+var greenQuadrant  = '#td-11, #td-12, #td-13, #td-21, #td-22, #td-23, #td-31, #td-32, #td-33';
+var redQuadrant    = '#td-14, #td-15, #td-16, #td-24, #td-25, #td-26, #td-34, #td-35, #td-36';
+var yellowQuadrant = '#td-41, #td-42, #td-43, #td-51, #td-52, #td-53, #td-61, #td-62, #td-63';
+var blueQuadrant   = '#td-44, #td-45, #td-46, #td-54, #td-55, #td-56, #td-64, #td-65, #td-66';
+
 function simonManager (clickedSpot) {
-    var spotGroup = convertSpotToColor(clickedSpot);
+  var spotGroup = convertSpotToColor(clickedSpot);
 }
 
 function convertClickedSpot(p) {
@@ -13,7 +18,7 @@ function convertClickedSpot(p) {
     case 'td-31':
     case 'td-32':
     case 'td-33':
-      return {td:'#td-11, #td-12, #td-13, #td-21, #td-22, #td-23, #td-31, #td-32, #td-33',color:'green'};
+      return {td:greenQuadrant, color:'green'};
     case 'td-14':
     case 'td-15':
     case 'td-16':
@@ -23,7 +28,7 @@ function convertClickedSpot(p) {
     case 'td-34':
     case 'td-35':
     case 'td-36':
-      return {td:'#td-14, #td-15, #td-16, #td-24, #td-25, #td-26, #td-34, #td-35, #td-36',color:'red'};
+      return {td:redQuadrant, color:'red'};
     case 'td-41':
     case 'td-42':
     case 'td-43':
@@ -33,7 +38,7 @@ function convertClickedSpot(p) {
     case 'td-61':
     case 'td-62':
     case 'td-63':
-      return {td:'#td-41, #td-42, #td-43, #td-51, #td-52, #td-53, #td-61, #td-62, #td-63',color:'yellow'};
+      return {td:yellowQuadrant, color:'yellow'};
     case 'td-44':
     case 'td-45':
     case 'td-46':
@@ -43,6 +48,6 @@ function convertClickedSpot(p) {
     case 'td-56':
     case 'td-65':
     case 'td-66':
-      return {td:'#td-44, #td-45, #td-46, #td-54, #td-55, #td-56, #td-64, #td-65, #td-66',color:'blue'};
+      return {td:blueQuadrant, color:'blue'};
   }
 }

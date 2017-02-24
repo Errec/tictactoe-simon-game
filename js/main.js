@@ -28,8 +28,8 @@ $(document).ready(function() {
   $('.ttt').hide();
   $('.ttt-l').css('border-left', 'none');
   $('.ttt-b').css('border-bottom', 'none');
-  $('.simon-l').css('border-left', 'solid black 2px');
-  $('.simon-b').css('border-bottom', 'solid black 2px');
+  $('.simon-l').css('border-left', 'solid black 5px');
+  $('.simon-b').css('border-bottom', 'solid black 5px');
   $('.main__table').css('width', '300px').css('height', '300px');
 
   $('.td').click(function() {
