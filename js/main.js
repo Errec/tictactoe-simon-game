@@ -11,7 +11,7 @@ var tttData = {
   openSpots    : 9,
   xType: 'human',
   oType: 'machine',
-  playerTurn   : 'X',
+  playerTurn   : 'x',
   playerXSpots : [],
   playerOSpots : [],
   score        : {

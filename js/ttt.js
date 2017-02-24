@@ -25,6 +25,7 @@ $('.main__ttt-bt-o').click(function() {
 });
 
 function tttManager(t, clickedSpot) {
+
   $('.td').css('pointer-events', 'auto');
   var xsvg_1 = '<svg class= "ttt-svg x-svg" version="1.0" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="xMaxYMax" viewBox="0 0 3400 3400"><g class="svg-curve" id="';
   var xsvg_2 = '" fill="#FFFFFF" stroke="none"><path d="M220 2335 l-225 -225 413 -413 412 -412 -410 -410 c-225 -225 -410 -414 -410 -420 0 -13 448 -461 454 -455 3 3 186 186 408 407 222 222 411 403 418 403 8 0 198 -183 422 -407 l408 -408 225 225 c124 124 225 229 225 235 0 6 -185 195 -410 420 l-410 410 412 412 413 413 -225 225 c-124 124 -229 225 -235 225 -5 0 -193 -183 -417 -407 l-407 -407 -409 407 c-225 224 -413 407 -418 407 -5 0 -110 -101 -234 -225z"/></g></svg>';
@@ -41,11 +42,17 @@ function tttManager(t, clickedSpot) {
 
   if (t.playerXSpots.indexOf(spotGroup.g) > -1 || t.playerOSpots.indexOf(spotGroup.g) > -1) {
     return;
-  } else if (t.playerTurn === 'X') {
+  } else if (t.playerTurn === 'x') {
     t.playerXSpots.push(spotGroup.g);
     $('#' + spotGroup.tdRef).prepend("<div class='x'>" + xsvg_1 + spotGroup.g + xsvg_2 + "</div>");
+
     if (t.openSpots < 6) {
-      if (checkForWin(t.playerXSpots)) {
+      if (checkForWin(t.playerTurn, t.playerXSpots, spotGroup.tdRef)) {
+        setTimeout(function() {
+          console.log('#score-' + t.playerTurn);
+          $('#score-x').removeClass("make-green");
+          $('.svg-curve').removeClass('make-green');
+        }, 1000);
         t.xType === 'human' ? t.score.humanX++ : t.score.machineX++;
         updateScore(t);
         tttReset(t);
@@ -55,8 +62,13 @@ function tttManager(t, clickedSpot) {
   } else {
     t.playerOSpots.push(spotGroup.g);
     $('#' + spotGroup.tdRef).prepend("<div class='x'>" + osvg_1 + spotGroup.g + osvg_2 + "</div>");
+
     if (t.openSpots < 6) {
-      if (checkForWin(t.playerOSpots)) {
+      if (checkForWin(t.playerTurn, t.playerOSpots, spotGroup.tdRef)) {
+        setTimeout(function() {
+          $('#score-o').removeClass("make-green");
+          $('.svg-curve').removeClass('make-green');
+        }, 1000);
         t.oType === 'human' ? t.score.humanO++ : t.score.machineO++;
         updateScore(t);
         tttReset(t);
@@ -66,12 +78,18 @@ function tttManager(t, clickedSpot) {
   }
 
   if (--t.openSpots === 0) {
+    $('#' + spotGroup.tdRef).hide();
+    $('#' + spotGroup.tdRef).show();
     $('.svg-curve').addClass('make-red');
+    setTimeout(function() {
+      console.log('#score-' + t.playerTurn);
+      $('.svg-curve').removeClass('make-red');
+    }, 1000);
     tttReset(t);
     return;
   }
 
-  t.playerTurn === 'X' ? t.playerTurn = 'O' : t.playerTurn = 'X';
+  t.playerTurn === 'x' ? t.playerTurn = 'o' : t.playerTurn = 'x';
   checkForMachine(t);
   return;
 }
@@ -126,13 +144,16 @@ function convertClickedSpot(p) {
   }
 }
 
-function checkForWin(playerArr) {
+function checkForWin(turn, playerArr, id) {
   var win = false;
   for (var i = 0; i < winArr.length; i++) {
     win = playerArr.filter(function (elem) {
       return winArr[i].indexOf(elem) > -1;
     }).length === winArr[i].length;
     if(win) {
+      $('#' + id).hide();
+      $('#' + id).show();
+      $('#score-' + turn).addClass("make-green");
       $('#' + winArr[i][0]).addClass("make-green");
       $('#' + winArr[i][1]).addClass("make-green");
       $('#' + winArr[i][2]).addClass("make-green");
@@ -141,7 +162,6 @@ function checkForWin(playerArr) {
   }
   return win;
 }
-
 function updateScore(t) {
   $('.main__x-score').text(function () {
     var value;
@@ -162,7 +182,7 @@ function updateScore(t) {
 function tttReset(t) {
   $('.td').css('pointer-events', 'none');
   t.openSpots    = 9;
-  t.playerTurn   = 'X';
+  t.playerTurn   = 'x';
   t.playerXSpots = [];
   t.playerOSpots = [];
   setTimeout(function() {
@@ -175,13 +195,13 @@ function tttReset(t) {
 }
 
 function checkForMachine (t) {
-  if (t.playerTurn === 'X' && t.xType === 'machine') {
+  if (t.playerTurn === 'x' && t.xType === 'machine') {
     $('.td').css('pointer-events', 'none');
     setTimeout(function() {
       tttManager(t, convertToTd(pickSpot(t, t.playerOSpots, t.playerXSpots)));
     }, 350);
   }
-  if (t.playerTurn === 'O' && t.oType === 'machine') {
+  if (t.playerTurn === 'o' && t.oType === 'machine') {
     $('.td').css('pointer-events', 'none');
     setTimeout(function() {
       tttManager(t, convertToTd(pickSpot(t, t.playerXSpots, t.playerOSpots)));
