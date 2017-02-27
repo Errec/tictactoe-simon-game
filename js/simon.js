@@ -5,35 +5,47 @@ var blueQuadrant   = '#td-44, #td-45, #td-46, #td-54, #td-55, #td-56, #td-64, #t
 
 $(greenQuadrant).click(function() {
   $(".td").css("pointer-events", "none");
+  var audio = document.getElementById('green');
+  audio.currentTime = 0;
+  audio.play();
   $(greenQuadrant).css('background-color', '#7BFF91');
   setTimeout(function () {
     $(greenQuadrant).css('background-color', '#45D655');
     $(".td").css("pointer-events", "auto");
-  }, 200);
+  }, 250);
 });
 $(redQuadrant).click(function() {
   $(".td").css("pointer-events", "none");
+  var audio = document.getElementById('red');
+  audio.currentTime = 0;
+  audio.play();
   $(redQuadrant).css('background-color', '#F68163');
   setTimeout(function () {
     $(redQuadrant).css('background-color', '#DC3B22');
     $(".td").css("pointer-events", "auto");
-  }, 200);
+  }, 250);
 });
 $(yellowQuadrant).click(function() {
+  var audio = document.getElementById('yellow');
+  audio.currentTime = 0;
+  audio.play();
   $(".td").css("pointer-events", "none");
   $(yellowQuadrant).css('background-color', '#FFFDA9');
   setTimeout(function () {
     $(yellowQuadrant).css('background-color', '#E1D934');
     $(".td").css("pointer-events", "auto");
-  }, 200);
+  }, 250);
 });
 $(blueQuadrant).click(function() {
+  var audio = document.getElementById('blue');
+  audio.currentTime = 0;
+  audio.play();
   $(".td").css("pointer-events", "none");
   $(blueQuadrant).css('background-color', '#4FEEFF');
   setTimeout(function () {
     $(blueQuadrant).css('background-color', '#00A8F1');
     $(".td").css("pointer-events", "auto");
-  }, 200);
+  }, 250);
 });
 
 function simonManager (clickedSpot) {
