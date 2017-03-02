@@ -18,6 +18,22 @@ $(blueQuadrant).click(function() {
 
 function simonManager(s, clickedSpot) {
   var spotGroup = convertClickedSpot(clickedSpot);
+  if (s.turn === 'machine') {
+    $(".td").css("pointer-events", "none");
+    machineTurn(s.machineStreak, s.playerFail);
+  } else {
+    playerFail = playerTurn(spotGroup, s.machineStreak, s.playerStreak); // TODO
+  }
+}
+
+
+function machineTurn(streak, fail) {
+  if (streak.lenght) {
+    blinkQuadrants(streak); // TODO
+  }
+  if(!fail) {
+    pushNewColor(streak); // TODO
+  }
 }
 
 function convertClickedSpot(p) {
