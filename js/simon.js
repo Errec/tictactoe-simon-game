@@ -3,12 +3,6 @@ var redQuadrant    = '#td-14, #td-15, #td-16, #td-24, #td-25, #td-26, #td-34, #t
 var yellowQuadrant = '#td-41, #td-42, #td-43, #td-51, #td-52, #td-53, #td-61, #td-62, #td-63';
 var blueQuadrant   = '#td-44, #td-45, #td-46, #td-54, #td-55, #td-56, #td-64, #td-65, #td-66';
 
-var simonData = {
-  machineStreak : [],
-  playerStreak  : [],
-  turn : 'machine'
-};
-
 $(greenQuadrant).click(function() {
   activateQuadrant(greenQuadrant,'green','#7BFF91','#45D655');
 });
@@ -22,7 +16,7 @@ $(blueQuadrant).click(function() {
   activateQuadrant(blueQuadrant,'blue','#4FEEFF','#00A8F1');
 });
 
-function simonManager(clickedSpot) {
+function simonManager(s, clickedSpot) {
   var spotGroup = convertClickedSpot(clickedSpot);
 }
 

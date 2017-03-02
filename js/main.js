@@ -22,6 +22,13 @@ var tttData = {
   }
 };
 
+var simonData = {
+  machineStreak : [],
+  playerStreak  : [],
+  turn          : 'machine',
+  playerFail    : false
+};
+
 $(document).ready(function() {
 
   // simulate toggle btn
@@ -37,7 +44,7 @@ $(document).ready(function() {
       tttManager(tttData, this.id);
       console.log(tttData);
     } else {
-      simonManager(this.id);
+      simonManager(simonData, this.id);
     }
   });
 
