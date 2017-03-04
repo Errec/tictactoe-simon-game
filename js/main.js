@@ -42,7 +42,6 @@ $(document).ready(function() {
   $('.td').click(function() {
     if ($('.header__button').data('game') === 't') {
       tttManager(tttData, this.id);
-      console.log(tttData);
     } else {
       simonManager(simonData, this.id);
     }
