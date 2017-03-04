@@ -23,13 +23,13 @@ function simonManager(s, clickedSpot) {
   });
 
   var spotGroup = convertClickedSpot(clickedSpot);
-/*  if (s.turn === 'machine') {
+  if (s.turn === 'machine') {
     $(".td").css("pointer-events", "none");
     machineTurn(s.machineStreak, s.playerFail);
     $(".td").css("pointer-events", "auto");
   } else {
     playerFail = playerTurn(spotGroup, s.machineStreak, s.playerStreak); // TODO
-  }*/
+  }
 }
 
 
@@ -40,6 +40,12 @@ function machineTurn(streak, fail) {
   if(!fail) {
     pushNewColor(streak); // TODO
   }
+}
+
+function pushNewColor(streak) {
+  var colors = [green, red, yellow, blue];
+  streak.push(colors[Math.floor(Math.random()*colors.length)]);
+  streak[streak.length - 1].activate();
 }
 
 function convertClickedSpot(p) {
