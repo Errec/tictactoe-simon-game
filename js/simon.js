@@ -28,14 +28,14 @@ function simonManager(s, clickedSpot) {
     machineTurn(s.machineStreak, s.playerFail);
     $(".td").css("pointer-events", "auto");
   } else {
-    playerFail = playerTurn(spotGroup, s.machineStreak, s.playerStreak); // TODO
+    s.playerFail = playerTurn(spotGroup, s.machineStreak, s.playerStreak); // TODO
   }
 }
 
 
 function machineTurn(streak, fail) {
-  if (streak.lenght) {
-    blinkQuadrants(streak); // TODO
+  if (streak.length) {
+    activateOnStreak(streak); // TODO
   }
   if(!fail) {
     pushNewColor(streak); // TODO
@@ -78,4 +78,12 @@ function quadrant(IDs, colorName, hexLight, hexDark) {
       $(".td").css("pointer-events", "auto");
     }, 250);
   };
+}
+
+function activateOnStreak(streak) {
+  for (var i = 0; i < streak.length; i++) {
+    setTimeout(function(j) {
+      streak[j].activate();
+    }, i * 250, i); // we're passing x
+  }
 }
