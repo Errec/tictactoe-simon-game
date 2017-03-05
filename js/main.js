@@ -38,13 +38,16 @@ $(document).ready(function() {
   $('.simon-l').css('border-left', 'solid black 5px');
   $('.simon-b').css('border-bottom', 'solid black 5px');
   $('.main__table').css('width', '300px').css('height', '300px');
+  $(".td").css("pointer-events", "none");
 
   $('.td').click(function() {
     if ($('.header__button').data('game') === 't') {
       tttManager(tttData, this.id);
-    } else {
-      simonManager(simonData, this.id);
     }
   });
 
+  $('.main__simon-bt-play').click(function() {
+    $('.main__simon-bt-play').css("pointer-events", "none");
+    simonManager(simonData);
+  });
 });

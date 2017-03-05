@@ -8,38 +8,53 @@ var red    = new quadrant(redQuadrantIDs,'red','#F68163','#DC3B22');
 var yellow = new quadrant(yellowQuadrantIDs,'yellow','#FFFDA9','#E1D934');
 var blue   = new quadrant(blueQuadrantIDs,'blue','#4FEEFF','#00A8F1');
 
-function simonManager(s, clickedSpot) {
+function simonManager(s) {
+  machineTurn(s);
+}
+
+function playerTurn(s) {
+  var clickCount = 0;
+  s.playerFail = false;
+  $(".td").css("pointer-events", "auto");
   $(greenQuadrantIDs).click(function() {
     green.activate();
+    clickCount++;
+    s.playerStreak.push(green);
+    checkStatus(s, clickCount); // TODO
   });
   $(redQuadrantIDs).click(function() {
     red.activate();
+    clickCount++;
+    s.playerStreak.push(red);
+    checkStatus(s, clickCount); // TODO
   });
   $(yellowQuadrantIDs).click(function() {
     yellow.activate();
+    clickCount++;
+    s.playerStreak.push(yellow);
+    checkStatus(s, clickCount); // TODO
   });
   $(blueQuadrantIDs).click(function() {
     blue.activate();
+    clickCount++;
+    s.playerStreak.push(blue);
+    checkStatus(s, clickCount); // TODO
   });
-
-  var spotGroup = convertClickedSpot(clickedSpot);
-  if (s.turn === 'machine') {
-    $(".td").css("pointer-events", "none");
-    machineTurn(s.machineStreak, s.playerFail);
-    $(".td").css("pointer-events", "auto");
-  } else {
-    s.playerFail = playerTurn(spotGroup, s.machineStreak, s.playerStreak); // TODO
-  }
 }
 
+function checkStatus(s, clickCount) {
+  console.log(s.playerStreak[s.playerStreak.length-1]);
+}
 
-function machineTurn(streak, fail) {
-  if (streak.length) {
-    activateOnStreak(streak); // TODO
+function machineTurn(s) {
+  $(".td").css("pointer-events", "none");
+  if (s.machineStreak.length) {
+    activateAllColorsStreak(s.machineStreak);
   }
-  if(!fail) {
-    pushNewColor(streak); // TODO
+  if(!s.playerFail) {
+    pushNewColor(s.machineStreak);
   }
+  playerTurn(s);
 }
 
 function pushNewColor(streak) {
@@ -80,7 +95,7 @@ function quadrant(IDs, colorName, hexLight, hexDark) {
   };
 }
 
-function activateOnStreak(streak) {
+function activateAllColorsStreak(streak) {
   for (var i = 0; i < streak.length; i++) {
     setTimeout(function(j) {
       streak[j].activate();
