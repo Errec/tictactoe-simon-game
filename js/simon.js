@@ -19,30 +19,26 @@ function playerTurn(s) {
   $(greenQuadrantIDs).click(function() {
     green.activate();
     clickCount++;
-    s.playerStreak.push(green);
-    checkStatus(s, clickCount); // TODO
+    checkGameStatus(s, clickCount, green); // TODO
   });
   $(redQuadrantIDs).click(function() {
     red.activate();
     clickCount++;
-    s.playerStreak.push(red);
-    checkStatus(s, clickCount); // TODO
+    checkGameStatus(s, clickCount, red); // TODO
   });
   $(yellowQuadrantIDs).click(function() {
     yellow.activate();
     clickCount++;
-    s.playerStreak.push(yellow);
-    checkStatus(s, clickCount); // TODO
+    checkGameStatus(s, clickCount, yellow); // TODO
   });
   $(blueQuadrantIDs).click(function() {
     blue.activate();
     clickCount++;
-    s.playerStreak.push(blue);
-    checkStatus(s, clickCount); // TODO
+    checkGameStatus(s, clickCount, blue); // TODO
   });
 }
 
-function checkStatus(s, clickCount) {
+function checkGameStatus(s, clickCount, quadrant) {
   console.log(s.playerStreak[s.playerStreak.length-1]);
 }
 
