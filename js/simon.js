@@ -72,19 +72,6 @@ function pushNewColor(streak) {
   streak.push(colors[Math.floor(Math.random()*colors.length)]);
 }
 
-function convertClickedSpot(p) {
-  switch (p) {
-    case greenQuadrantIDs.indexOf(p) > -1:
-      return {td:greenQuadrantIDs, color:'green'};
-    case redQuadrantIDs.indexOf(p) > -1:
-      return {td:redQuadrantIDs, color:'red'};
-    case yellowQuadrantIDs.indexOf(p) > -1:
-      return {td:yellowQuadrantIDs, color:'yellow'};
-    case blueQuadrantIDs.indexOf(p) > -1:
-      return {td:blueQuadrantIDs, color:'blue'};
-  }
-}
-
 function quadrant(IDs, colorName, hexLight, hexDark) {
   var that = this;
   this.IDs              = IDs;
