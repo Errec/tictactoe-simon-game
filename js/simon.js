@@ -14,8 +14,11 @@ function simonManager(s) {
 
 function playerTurn(s) {
   var clickCount = 0;
+  console.log(clickCount);
   s.playerFail = false;
-  $(".td").css("pointer-events", "auto");
+  setTimeout(function() {
+    $(".td").css("pointer-events", "auto");
+  }, 250 * s.machineStreak.length);
   $(greenQuadrantIDs).click(function() {
     green.activate();
     clickCount++;
@@ -39,7 +42,19 @@ function playerTurn(s) {
 }
 
 function checkGameStatus(s, clickCount, quadrant) {
-  console.log(s.playerStreak[s.playerStreak.length-1]);
+  if (s.machineStreak[clickCount - 1] === quadrant) {
+    s.playerStreak.push(quadrant);
+    if (s.machineStreak.length === clickCount) {
+      setTimeout(function() {
+        machineTurn(s);
+      }, 250);
+    }
+  } else {
+      s.playerFail = true;
+      setTimeout(function() {
+        machineTurn(s);
+      }, 250);
+    }
 }
 
 function machineTurn(s) {
@@ -95,6 +110,6 @@ function activateAllColorsStreak(streak) {
   for (var i = 0; i < streak.length; i++) {
     setTimeout(function(j) {
       streak[j].activate();
-    }, i * 250, i); // we're passing x
+    }, i * 250, i);
   }
 }

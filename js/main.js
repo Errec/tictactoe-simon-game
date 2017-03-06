@@ -30,7 +30,6 @@ var simonData = {
 };
 
 $(document).ready(function() {
-
   // simulate toggle btn
   $('.ttt').hide();
   $('.ttt-l').css('border-left', 'none');
