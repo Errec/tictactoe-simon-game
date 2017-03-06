@@ -13,38 +13,37 @@ function simonManager(s) {
 }
 
 function playerTurn(s) {
-  var clickCount = 0;
-  console.log(clickCount);
+  console.log(s.clickCount);
   s.playerFail = false;
   setTimeout(function() {
     $(".td").css("pointer-events", "auto");
   }, 250 * s.machineStreak.length);
   $(greenQuadrantIDs).click(function() {
     green.activate();
-    clickCount++;
-    checkGameStatus(s, clickCount, green); // TODO
+    s.clickCount++;
+    checkGameStatus(s, green); // TODO
   });
   $(redQuadrantIDs).click(function() {
     red.activate();
-    clickCount++;
-    checkGameStatus(s, clickCount, red); // TODO
+    s.clickCount++;
+    checkGameStatus(s, red); // TODO
   });
   $(yellowQuadrantIDs).click(function() {
     yellow.activate();
-    clickCount++;
-    checkGameStatus(s, clickCount, yellow); // TODO
+    s.clickCount++;
+    checkGameStatus(s, yellow); // TODO
   });
   $(blueQuadrantIDs).click(function() {
     blue.activate();
-    clickCount++;
-    checkGameStatus(s, clickCount, blue); // TODO
+    s.clickCount++;
+    checkGameStatus(s, blue); // TODO
   });
 }
 
-function checkGameStatus(s, clickCount, quadrant) {
-  if (s.machineStreak[clickCount - 1].colorName === quadrant.colorName) {
+function checkGameStatus(s, quadrant) {
+  if (s.machineStreak[s.clickCount - 1].colorName === quadrant.colorName) {
     s.playerStreak.push(quadrant);
-    if (s.machineStreak.length === clickCount) {
+    if (s.machineStreak.length === s.clickCount) {
       $(".td").css("pointer-events", "none");
       setTimeout(function() {
         machineTurn(s);

@@ -25,7 +25,8 @@ var tttData = {
 var simonData = {
   machineStreak : [],
   playerStreak  : [],
-  playerFail    : false
+  playerFail    : false,
+  clickCount    : 0
 };
 
 $(document).ready(function() {
