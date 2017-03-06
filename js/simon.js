@@ -92,14 +92,12 @@ function quadrant(IDs, colorName, hexLight, hexDark) {
   this.hexLight         = hexLight;
   this.hexDark          = hexDark;
   this.activate = function(time) {
-    $(".td").css("pointer-events", "none");
     var audio = document.getElementById(this.colorName);
     audio.currentTime = 0;
     audio.play();
     $(this.IDs).css('background-color', this.hexLight);
     setTimeout(function() {
       $(that.IDs).css('background-color', that.hexDark);
-      $(".td").css("pointer-events", "auto");
     }, time);
   };
 }
