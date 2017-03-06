@@ -9,22 +9,22 @@ var yellow = new quadrant(yellowQuadrantIDs,'yellow','#FFFDA9','#E1D934');
 var blue   = new quadrant(blueQuadrantIDs,'blue','#4FEEFF','#00A8F1');
 
 $(greenQuadrantIDs).click(function() {
-  green.activate();
+  green.activate(250);
   simonData.clickCount++;
   checkGameStatus(simonData, green);
 });
 $(redQuadrantIDs).click(function() {
-  red.activate();
+  red.activate(250);
   simonData.clickCount++;
   checkGameStatus(simonData, red);
 });
 $(yellowQuadrantIDs).click(function() {
-  yellow.activate();
+  yellow.activate(250);
   simonData.clickCount++;
   checkGameStatus(simonData, yellow);
 });
 $(blueQuadrantIDs).click(function() {
-  blue.activate();
+  blue.activate(250);
   simonData.clickCount++;
   checkGameStatus(simonData, blue);
 });
@@ -37,7 +37,7 @@ function playerTurn(s) {
   s.playerFail = false;
   setTimeout(function() {
     $(".td").css("pointer-events", "auto");
-  }, 250 * s.machineStreak.length);
+  }, 600 * s.machineStreak.length);
 }
 
 function checkGameStatus(s, quadrant) {
@@ -47,14 +47,14 @@ function checkGameStatus(s, quadrant) {
       $(".td").css("pointer-events", "none");
       setTimeout(function() {
         machineTurn(s);
-      }, 250);
+      }, 600);
     }
   } else {
       s.playerFail = true;
       $(".td").css("pointer-events", "none");
       setTimeout(function() {
         machineTurn(s);
-      }, 250);
+      }, 500);
     }
 }
 
@@ -91,7 +91,7 @@ function quadrant(IDs, colorName, hexLight, hexDark) {
   this.colorName        = colorName;
   this.hexLight         = hexLight;
   this.hexDark          = hexDark;
-  this.activate = function() {
+  this.activate = function(time) {
     $(".td").css("pointer-events", "none");
     var audio = document.getElementById(this.colorName);
     audio.currentTime = 0;
@@ -100,14 +100,14 @@ function quadrant(IDs, colorName, hexLight, hexDark) {
     setTimeout(function() {
       $(that.IDs).css('background-color', that.hexDark);
       $(".td").css("pointer-events", "auto");
-    }, 250);
+    }, time);
   };
 }
 
 function activateAllColorsStreak(streak) {
   for (var i = 0; i < streak.length; i++) {
     setTimeout(function(j) {
-      streak[j].activate();
-    }, i * 250, i);
+      streak[j].activate(300);
+    }, i * 600, i);
   }
 }
