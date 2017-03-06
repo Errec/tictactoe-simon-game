@@ -8,36 +8,36 @@ var red    = new quadrant(redQuadrantIDs,'red','#F68163','#DC3B22');
 var yellow = new quadrant(yellowQuadrantIDs,'yellow','#FFFDA9','#E1D934');
 var blue   = new quadrant(blueQuadrantIDs,'blue','#4FEEFF','#00A8F1');
 
+$(greenQuadrantIDs).click(function() {
+  green.activate();
+  simonData.clickCount++;
+  checkGameStatus(simonData, green);
+});
+$(redQuadrantIDs).click(function() {
+  red.activate();
+  simonData.clickCount++;
+  checkGameStatus(simonData, red);
+});
+$(yellowQuadrantIDs).click(function() {
+  yellow.activate();
+  simonData.clickCount++;
+  checkGameStatus(simonData, yellow);
+});
+$(blueQuadrantIDs).click(function() {
+  blue.activate();
+  simonData.clickCount++;
+  checkGameStatus(simonData, blue);
+});
+
 function simonManager(s) {
   machineTurn(s);
 }
 
 function playerTurn(s) {
-  console.log(s.clickCount);
   s.playerFail = false;
   setTimeout(function() {
     $(".td").css("pointer-events", "auto");
   }, 250 * s.machineStreak.length);
-  $(greenQuadrantIDs).click(function() {
-    green.activate();
-    s.clickCount++;
-    checkGameStatus(s, green); // TODO
-  });
-  $(redQuadrantIDs).click(function() {
-    red.activate();
-    s.clickCount++;
-    checkGameStatus(s, red); // TODO
-  });
-  $(yellowQuadrantIDs).click(function() {
-    yellow.activate();
-    s.clickCount++;
-    checkGameStatus(s, yellow); // TODO
-  });
-  $(blueQuadrantIDs).click(function() {
-    blue.activate();
-    s.clickCount++;
-    checkGameStatus(s, blue); // TODO
-  });
 }
 
 function checkGameStatus(s, quadrant) {
@@ -59,6 +59,7 @@ function checkGameStatus(s, quadrant) {
 }
 
 function machineTurn(s) {
+  s.clickCount = 0;
   if(!s.playerFail) {
     pushNewColor(s.machineStreak);
   }
