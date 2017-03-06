@@ -25,7 +25,6 @@ var tttData = {
 var simonData = {
   machineStreak : [],
   playerStreak  : [],
-  turn          : 'machine',
   playerFail    : false
 };
 

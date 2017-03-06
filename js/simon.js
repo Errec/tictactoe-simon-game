@@ -42,15 +42,17 @@ function playerTurn(s) {
 }
 
 function checkGameStatus(s, clickCount, quadrant) {
-  if (s.machineStreak[clickCount - 1] === quadrant) {
+  if (s.machineStreak[clickCount - 1].colorName === quadrant.colorName) {
     s.playerStreak.push(quadrant);
     if (s.machineStreak.length === clickCount) {
+      $(".td").css("pointer-events", "none");
       setTimeout(function() {
         machineTurn(s);
       }, 250);
     }
   } else {
       s.playerFail = true;
+      $(".td").css("pointer-events", "none");
       setTimeout(function() {
         machineTurn(s);
       }, 250);
@@ -58,13 +60,10 @@ function checkGameStatus(s, clickCount, quadrant) {
 }
 
 function machineTurn(s) {
-  $(".td").css("pointer-events", "none");
   if(!s.playerFail) {
     pushNewColor(s.machineStreak);
   }
-  if (s.machineStreak.length) {
-    activateAllColorsStreak(s.machineStreak);
-  }
+  activateAllColorsStreak(s.machineStreak);
   playerTurn(s);
 }
 
