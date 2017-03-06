@@ -59,11 +59,11 @@ function checkGameStatus(s, clickCount, quadrant) {
 
 function machineTurn(s) {
   $(".td").css("pointer-events", "none");
-  if (s.machineStreak.length) {
-    activateAllColorsStreak(s.machineStreak);
-  }
   if(!s.playerFail) {
     pushNewColor(s.machineStreak);
+  }
+  if (s.machineStreak.length) {
+    activateAllColorsStreak(s.machineStreak);
   }
   playerTurn(s);
 }
@@ -71,7 +71,6 @@ function machineTurn(s) {
 function pushNewColor(streak) {
   var colors = [green, red, yellow, blue];
   streak.push(colors[Math.floor(Math.random()*colors.length)]);
-  streak[streak.length - 1].activate();
 }
 
 function convertClickedSpot(p) {
