@@ -61,7 +61,13 @@ function checkGameStatus(s, quadrant) {
     }
   } else {
       s.playerFail = true;
-      machineTurn(s);
+      setTimeout(function () {
+        green.activate(playerTime, false);
+        red.activate(playerTime, false);
+        yellow.activate(playerTime, false);
+        blue.activate(playerTime, false);
+        machineTurn(s);
+      }, playerTime * 1.5);
     }
 }
 
