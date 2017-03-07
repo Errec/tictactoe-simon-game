@@ -88,10 +88,13 @@ function quadrant(IDs, colorName, hexLight, hexDark) {
   this.colorName        = colorName;
   this.hexLight         = hexLight;
   this.hexDark          = hexDark;
-  this.activate = function(time) {
-    var audio = document.getElementById(this.colorName);
-    audio.currentTime = 0;
-    audio.play();
+  this.activate = function(time, playAudio) {
+    playAudio = (typeof playAudio !== 'undefined') ?  playAudio : true;
+    if (playAudio) {
+      var audio = document.getElementById(this.colorName);
+      audio.currentTime = 0;
+      audio.play();
+    }
     $(this.IDs).css('background-color', this.hexLight);
     setTimeout(function() {
       $(that.IDs).css('background-color', that.hexDark);
@@ -102,7 +105,7 @@ function quadrant(IDs, colorName, hexLight, hexDark) {
 function activateAllColorsStreak(streak) {
   for (var i = 0; i < streak.length; i++) {
     setTimeout(function(j) {
-      streak[j].activate(300);
+      streak[j].activate(300, true);
     }, i * machineTime * 2, i);
   }
 }
