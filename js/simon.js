@@ -3,28 +3,30 @@ var redQuadrantIDs    = '#td-14, #td-15, #td-16, #td-24, #td-25, #td-26, #td-34,
 var yellowQuadrantIDs = '#td-41, #td-42, #td-43, #td-51, #td-52, #td-53, #td-61, #td-62, #td-63';
 var blueQuadrantIDs   = '#td-44, #td-45, #td-46, #td-54, #td-55, #td-56, #td-64, #td-65, #td-66';
 var maxTurns = 3;
+var playerTime = 250;
+var machineTime = 300;
 var green  = new quadrant(greenQuadrantIDs,'green','#7BFF91','#45D655');
 var red    = new quadrant(redQuadrantIDs,'red','#F68163','#DC3B22');
 var yellow = new quadrant(yellowQuadrantIDs,'yellow','#FFFDA9','#E1D934');
 var blue   = new quadrant(blueQuadrantIDs,'blue','#4FEEFF','#00A8F1');
 
 $(greenQuadrantIDs).click(function() {
-  green.activate(250);
+  green.activate(playerTime);
   simonData.clickCount++;
   checkGameStatus(simonData, green);
 });
 $(redQuadrantIDs).click(function() {
-  red.activate(250);
+  red.activate(playerTime);
   simonData.clickCount++;
   checkGameStatus(simonData, red);
 });
 $(yellowQuadrantIDs).click(function() {
-  yellow.activate(250);
+  yellow.activate(playerTime);
   simonData.clickCount++;
   checkGameStatus(simonData, yellow);
 });
 $(blueQuadrantIDs).click(function() {
-  blue.activate(250);
+  blue.activate(playerTime);
   simonData.clickCount++;
   checkGameStatus(simonData, blue);
 });
@@ -38,7 +40,7 @@ function playerTurn(s) {
   s.playerFail = false;
   setTimeout(function() {
     $(".td").css("pointer-events", "auto");
-  }, 600 * s.machineStreak.length);
+  }, machineTime * 2 * s.machineStreak.length);
 }
 
 function checkGameStatus(s, quadrant) {
@@ -48,8 +50,9 @@ function checkGameStatus(s, quadrant) {
         alert('you win!');
         s.machineStreak = [];
         s.playerStreak = [];
+        $(".td").css("pointer-events", "none");
         $('.main__simon-bt-play').css("pointer-events", "auto");
-      }, 600);
+      }, machineTime * 2);
       return;
     }
     s.playerStreak.push(quadrant);
@@ -71,7 +74,7 @@ function machineTurn(s) {
     }
     activateAllColorsStreak(s.machineStreak);
     playerTurn(s);
-  }, 600);
+  }, machineTime * 2);
 }
 
 function pushNewColor(streak) {
@@ -100,6 +103,6 @@ function activateAllColorsStreak(streak) {
   for (var i = 0; i < streak.length; i++) {
     setTimeout(function(j) {
       streak[j].activate(300);
-    }, i * 600, i);
+    }, i * machineTime * 2, i);
   }
 }
