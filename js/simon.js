@@ -44,27 +44,24 @@ function checkGameStatus(s, quadrant) {
   if (s.machineStreak[s.clickCount - 1].colorName === quadrant.colorName) {
     s.playerStreak.push(quadrant);
     if (s.machineStreak.length === s.clickCount) {
-      $(".td").css("pointer-events", "none");
-      setTimeout(function() {
-        machineTurn(s);
-      }, 600);
+      machineTurn(s);
     }
   } else {
       s.playerFail = true;
-      $(".td").css("pointer-events", "none");
-      setTimeout(function() {
-        machineTurn(s);
-      }, 500);
+      machineTurn(s);
     }
 }
 
 function machineTurn(s) {
-  s.clickCount = 0;
-  if(!s.playerFail) {
-    pushNewColor(s.machineStreak);
-  }
-  activateAllColorsStreak(s.machineStreak);
-  playerTurn(s);
+  $(".td").css("pointer-events", "none");
+  setTimeout(function() {
+    s.clickCount = 0;
+    if(!s.playerFail) {
+      pushNewColor(s.machineStreak);
+    }
+    activateAllColorsStreak(s.machineStreak);
+    playerTurn(s);
+  }, 600);
 }
 
 function pushNewColor(streak) {
