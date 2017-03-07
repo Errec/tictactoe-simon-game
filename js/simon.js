@@ -4,7 +4,7 @@ var yellowQuadrantIDs = '#td-41, #td-42, #td-43, #td-51, #td-52, #td-53, #td-61,
 var blueQuadrantIDs   = '#td-44, #td-45, #td-46, #td-54, #td-55, #td-56, #td-64, #td-65, #td-66';
 var maxTurns    = 3;
 var playerTime  = 250;
-var machineTime = 300;
+var machineTime = 280;
 var green  = new quadrant(greenQuadrantIDs,'green','#7BFF91','#45D655');
 var red    = new quadrant(redQuadrantIDs,'red','#F68163','#DC3B22');
 var yellow = new quadrant(yellowQuadrantIDs,'yellow','#FFFDA9','#E1D934');
@@ -65,7 +65,9 @@ function checkGameStatus(s, quadrant) {
     }
     s.playerStreak.push(quadrant);
     if (s.machineStreak.length === s.clickCount) {
-      machineTurn(s);
+      setTimeout(function () {
+        machineTurn(s);
+      }, playerTime / 2);
     }
   } else {
       s.playerFail = true;
@@ -130,7 +132,7 @@ function quadrant(IDs, colorName, hexLight, hexDark) {
 function activateAllColorsStreak(streak) {
   for (var i = 0; i < streak.length; i++) {
     setTimeout(function(j) {
-      streak[j].activate(300, true);
+      streak[j].activate(machineTime, true);
     }, i * machineTime * 2, i);
   }
 }
