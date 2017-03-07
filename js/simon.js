@@ -2,7 +2,7 @@ var greenQuadrantIDs  = '#td-11, #td-12, #td-13, #td-21, #td-22, #td-23, #td-31,
 var redQuadrantIDs    = '#td-14, #td-15, #td-16, #td-24, #td-25, #td-26, #td-34, #td-35, #td-36';
 var yellowQuadrantIDs = '#td-41, #td-42, #td-43, #td-51, #td-52, #td-53, #td-61, #td-62, #td-63';
 var blueQuadrantIDs   = '#td-44, #td-45, #td-46, #td-54, #td-55, #td-56, #td-64, #td-65, #td-66';
-var maxTurns    = 3;
+var maxTurns    = 2;
 var playerTime  = 250;
 var machineTime = 280;
 var green  = new quadrant(greenQuadrantIDs,'green','#7BFF91','#45D655');
@@ -11,31 +11,35 @@ var yellow = new quadrant(yellowQuadrantIDs,'yellow','#FFFDA9','#E1D934');
 var blue   = new quadrant(blueQuadrantIDs,'blue','#4FEEFF','#00A8F1');
 
 $('.main__simon-bt-mode').click(function () {
+  resetData(simonData);
+  $(".td").css("pointer-events", "none");
   $('.main__simon-bt-mode').data('mode') === 's' ? $('.main__simon-bt-mode').data('mode' , 'n'): $('.main__simon-bt-mode').data('mode' , 's');
   $('.main__simon-bt-mode').text() === 'S' ? $('.main__simon-bt-mode').text('N'): $('.main__simon-bt-mode').text('S');
   $('.main__simon-bt-play').css("pointer-events", "auto");
-  resetData(simonData);
-  $(".td").css("pointer-events", "none");
 });
 
 $(greenQuadrantIDs).click(function() {
   green.activate(playerTime);
   simonData.clickCount++;
+  $(".td").css("pointer-events", "none");
   checkGameStatus(simonData, green);
 });
 $(redQuadrantIDs).click(function() {
   red.activate(playerTime);
   simonData.clickCount++;
+  $(".td").css("pointer-events", "none");
   checkGameStatus(simonData, red);
 });
 $(yellowQuadrantIDs).click(function() {
   yellow.activate(playerTime);
   simonData.clickCount++;
+  $(".td").css("pointer-events", "none");
   checkGameStatus(simonData, yellow);
 });
 $(blueQuadrantIDs).click(function() {
   blue.activate(playerTime);
   simonData.clickCount++;
+  $(".td").css("pointer-events", "none");
   checkGameStatus(simonData, blue);
 });
 
@@ -57,12 +61,13 @@ function checkGameStatus(s, quadrant) {
   if (s.machineStreak[s.clickCount - 1].colorName === quadrant.colorName) {
     if(s.clickCount === maxTurns) {
       setTimeout(function () {
-        $(".td").css("pointer-events", "none");
         alert('you win!');
         $('.main__simon-bt-play').css("pointer-events", "auto");
       }, machineTime * 2);
       return;
-    }
+    } else {
+      $(".td").css("pointer-events", "auto");
+  }
     s.playerStreak.push(quadrant);
     if (s.machineStreak.length === s.clickCount) {
       setTimeout(function () {
@@ -82,7 +87,6 @@ function checkGameStatus(s, quadrant) {
           machineTurn(s);
         } else {
           setTimeout(function () {
-            $(".td").css("pointer-events", "none");
             alert('you lose!');
             $('.main__simon-bt-play').css("pointer-events", "auto");
           }, machineTime * 2);
@@ -93,7 +97,6 @@ function checkGameStatus(s, quadrant) {
 }
 
 function machineTurn(s) {
-  $(".td").css("pointer-events", "none");
   setTimeout(function() {
     s.clickCount = 0;
     if(!s.playerFail) {
