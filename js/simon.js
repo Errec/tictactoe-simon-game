@@ -62,6 +62,7 @@ function checkGameStatus(s, quadrant) {
   } else {
       s.playerFail = true;
       setTimeout(function () {
+        document.getElementById('lose').play();
         green.activate(playerTime, false);
         red.activate(playerTime, false);
         yellow.activate(playerTime, false);
