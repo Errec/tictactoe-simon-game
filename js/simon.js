@@ -2,7 +2,7 @@ var greenQuadrantIDs  = '#td-11, #td-12, #td-13, #td-21, #td-22, #td-23, #td-31,
 var redQuadrantIDs    = '#td-14, #td-15, #td-16, #td-24, #td-25, #td-26, #td-34, #td-35, #td-36';
 var yellowQuadrantIDs = '#td-41, #td-42, #td-43, #td-51, #td-52, #td-53, #td-61, #td-62, #td-63';
 var blueQuadrantIDs   = '#td-44, #td-45, #td-46, #td-54, #td-55, #td-56, #td-64, #td-65, #td-66';
-
+var maxTurns = 3;
 var green  = new quadrant(greenQuadrantIDs,'green','#7BFF91','#45D655');
 var red    = new quadrant(redQuadrantIDs,'red','#F68163','#DC3B22');
 var yellow = new quadrant(yellowQuadrantIDs,'yellow','#FFFDA9','#E1D934');
@@ -34,6 +34,7 @@ function simonManager(s) {
 }
 
 function playerTurn(s) {
+  s.playerStreak  = [];
   s.playerFail = false;
   setTimeout(function() {
     $(".td").css("pointer-events", "auto");
@@ -42,6 +43,15 @@ function playerTurn(s) {
 
 function checkGameStatus(s, quadrant) {
   if (s.machineStreak[s.clickCount - 1].colorName === quadrant.colorName) {
+    if(s.clickCount === maxTurns) {
+      setTimeout(function () {
+        alert('you win!');
+        s.machineStreak = [];
+        s.playerStreak = [];
+        $('.main__simon-bt-play').css("pointer-events", "auto");
+      }, 600);
+      return;
+    }
     s.playerStreak.push(quadrant);
     if (s.machineStreak.length === s.clickCount) {
       machineTurn(s);
