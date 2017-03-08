@@ -2,6 +2,7 @@ var greenQuadrantIDs  = '#td-11, #td-12, #td-13, #td-21, #td-22, #td-23, #td-31,
 var redQuadrantIDs    = '#td-14, #td-15, #td-16, #td-24, #td-25, #td-26, #td-34, #td-35, #td-36';
 var yellowQuadrantIDs = '#td-41, #td-42, #td-43, #td-51, #td-52, #td-53, #td-61, #td-62, #td-63';
 var blueQuadrantIDs   = '#td-44, #td-45, #td-46, #td-54, #td-55, #td-56, #td-64, #td-65, #td-66';
+var playIcon = '<svg id="simon-play-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 394.28572 455.28192" width="50%" height="50%"><path d="M354.286 227.641L20 420.641v-386z" fill="none" stroke="#45d655" stroke-width="40"/></svg>';
 var playerTime  = 230;
 var machineTime = 270;
 var green  = new quadrant(greenQuadrantIDs,'green','#7BFF91','#45D655');
@@ -13,7 +14,8 @@ $('.main__simon-bt-mode').click(function () {
   resetData(simonData);
   $(".td").css("pointer-events", "none");
   $('.main__simon-bt-mode').data('mode') === 's' ? $('.main__simon-bt-mode').data('mode' , 'n').text('N').css('color', '#00A8F1') : $('.main__simon-bt-mode').data('mode' , 's').text('S').css('color', '#DC3B22');
-
+  $('.main__simon-bt-play').text('');
+  $('.main__simon-bt-play').append(playIcon);
   $('.main__simon-bt-play').css("pointer-events", "auto");
 });
 
@@ -70,6 +72,8 @@ function checkGameStatus(s, quadrant) {
   if (s.machineStreak[s.clickCount - 1].colorName === quadrant.colorName) {
     if(s.clickCount === s.maxTurns) {
       document.getElementById('win').play();
+      $('.main__simon-bt-play').text('');
+      $('.main__simon-bt-play').append(playIcon);
       $('html').css('backgroundImage', "url(http://res.cloudinary.com/dt4qeehms/image/upload/v1488934896/427118_1_n0wxq7.jpg)");
       $('body').fadeOut("slow", function () {
           $('body').css({display:"none"});
@@ -104,7 +108,8 @@ function checkGameStatus(s, quadrant) {
           machineTurn(s);
         } else {
           setTimeout(function () {
-            alert('you lose!');
+            $('.main__simon-bt-play').text('');
+            $('.main__simon-bt-play').append(playIcon);
             $('.main__simon-bt-play').css("pointer-events", "auto");
           }, machineTime * 2);
           return;
