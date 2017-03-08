@@ -26,7 +26,8 @@ var simonData = {
   machineStreak : [],
   playerStreak  : [],
   playerFail    : false,
-  clickCount    : 0
+  clickCount    : 0,
+  maxTurns      : 3
 };
 
 $(document).ready(function() {

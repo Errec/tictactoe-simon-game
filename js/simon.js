@@ -13,8 +13,8 @@ var blue   = new quadrant(blueQuadrantIDs,'blue','#4FEEFF','#00A8F1');
 $('.main__simon-bt-mode').click(function () {
   resetData(simonData);
   $(".td").css("pointer-events", "none");
-  $('.main__simon-bt-mode').data('mode') === 's' ? $('.main__simon-bt-mode').data('mode' , 'n'): $('.main__simon-bt-mode').data('mode' , 's');
-  $('.main__simon-bt-mode').text() === 'S' ? $('.main__simon-bt-mode').text('N'): $('.main__simon-bt-mode').text('S');
+  $('.main__simon-bt-mode').data('mode') === 's' ? $('.main__simon-bt-mode').data('mode' , 'n').text('N').css('color', '#00A8F1') : $('.main__simon-bt-mode').data('mode' , 's').text('S').css('color', '#DC3B22');
+
   $('.main__simon-bt-play').css("pointer-events", "auto");
 });
 
@@ -59,7 +59,7 @@ function playerTurn(s) {
 
 function checkGameStatus(s, quadrant) {
   if (s.machineStreak[s.clickCount - 1].colorName === quadrant.colorName) {
-    if(s.clickCount === maxTurns) {
+    if(s.clickCount === s.maxTurns) {
       setTimeout(function () {
         alert('you win!');
         $('.main__simon-bt-play').css("pointer-events", "auto");
