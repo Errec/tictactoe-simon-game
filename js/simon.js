@@ -2,9 +2,8 @@ var greenQuadrantIDs  = '#td-11, #td-12, #td-13, #td-21, #td-22, #td-23, #td-31,
 var redQuadrantIDs    = '#td-14, #td-15, #td-16, #td-24, #td-25, #td-26, #td-34, #td-35, #td-36';
 var yellowQuadrantIDs = '#td-41, #td-42, #td-43, #td-51, #td-52, #td-53, #td-61, #td-62, #td-63';
 var blueQuadrantIDs   = '#td-44, #td-45, #td-46, #td-54, #td-55, #td-56, #td-64, #td-65, #td-66';
-var maxTurns    = 2;
-var playerTime  = 250;
-var machineTime = 280;
+var playerTime  = 230;
+var machineTime = 270;
 var green  = new quadrant(greenQuadrantIDs,'green','#7BFF91','#45D655');
 var red    = new quadrant(redQuadrantIDs,'red','#F68163','#DC3B22');
 var yellow = new quadrant(yellowQuadrantIDs,'yellow','#FFFDA9','#E1D934');
@@ -44,9 +43,19 @@ $(blueQuadrantIDs).click(function() {
 });
 
 function simonManager(s) {
+  $('#simon-play-svg').css('display', 'none');
+  setScore(s);
   $(".td").css("pointer-events", "none");
   resetData(s);
   machineTurn(s);
+}
+
+function setScore(s) {
+  currentRound = s.machineStreak.length;
+  function n(n) {
+    return n > 9 ? "" + n: "0" + n;
+  }
+  $('.main__simon-bt-play').text(n(currentRound));
 }
 
 function playerTurn(s) {
@@ -60,10 +69,18 @@ function playerTurn(s) {
 function checkGameStatus(s, quadrant) {
   if (s.machineStreak[s.clickCount - 1].colorName === quadrant.colorName) {
     if(s.clickCount === s.maxTurns) {
+      document.getElementById('win').play();
+      $('html').css('backgroundImage', "url(http://res.cloudinary.com/dt4qeehms/image/upload/v1488934896/427118_1_n0wxq7.jpg)");
+      $('body').fadeOut("slow", function () {
+          $('body').css({display:"none"});
+      });
+      $('.main__simon-bt-play').css("pointer-events", "auto");
       setTimeout(function () {
-        alert('you win!');
-        $('.main__simon-bt-play').css("pointer-events", "auto");
-      }, machineTime * 2);
+        $('body').fadeIn("slow", function () {
+          $('body').css({display:"block"});
+        });
+        $('html').css('backgroundImage', "none");
+      }, machineTime * 7);
       return;
     } else {
       $(".td").css("pointer-events", "auto");
@@ -78,10 +95,10 @@ function checkGameStatus(s, quadrant) {
       s.playerFail = true;
       setTimeout(function () {
         document.getElementById('lose').play();
-        green.activate(playerTime, false);
-        red.activate(playerTime, false);
-        yellow.activate(playerTime, false);
-        blue.activate(playerTime, false);
+        green.activate(playerTime * 2, false);
+        red.activate(playerTime * 2, false);
+        yellow.activate(playerTime * 2, false);
+        blue.activate(playerTime * 2, false);
 
         if ($('.main__simon-bt-mode').data('mode') === 'n') {
           machineTurn(s);
@@ -97,6 +114,7 @@ function checkGameStatus(s, quadrant) {
 }
 
 function machineTurn(s) {
+  setScore(s);
   setTimeout(function() {
     s.clickCount = 0;
     if(!s.playerFail) {
@@ -104,7 +122,7 @@ function machineTurn(s) {
     }
     activateAllColorsStreak(s.machineStreak);
     playerTurn(s);
-  }, machineTime * 2);
+  }, machineTime * 3);
 }
 
 function pushNewColor(streak) {

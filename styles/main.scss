@@ -8,9 +8,14 @@ html, body
   height: 100%
   box-sizing: border-box
   overflow: hidden
+  transition: all 0.1s ease-in-out
 
 *, *:before, *:after
   box-sizing: inherit
+
+html
+  background-size: cover
+  background-repeat: no-repeat;
 
 body
   background-color: black

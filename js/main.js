@@ -47,6 +47,7 @@ $(document).ready(function() {
   });
 
   $('.main__simon-bt-play').click(function() {
+    $('#simon-play-svg').css('display', 'none');
     $('.main__simon-bt-play').css("pointer-events", "none");
     simonManager(simonData);
   });
