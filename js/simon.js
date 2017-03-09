@@ -20,40 +20,41 @@ $('.main__simon-bt-mode').click(function () {
 });
 
 $(greenQuadrantIDs).click(function() {
+  $(".td").css("pointer-events", "none");
   green.activate(playerTime);
   simonData.clickCount++;
-  $(".td").css("pointer-events", "none");
   checkGameStatus(simonData, green);
 });
 $(redQuadrantIDs).click(function() {
+  $(".td").css("pointer-events", "none");
   red.activate(playerTime);
   simonData.clickCount++;
-  $(".td").css("pointer-events", "none");
   checkGameStatus(simonData, red);
 });
 $(yellowQuadrantIDs).click(function() {
+  $(".td").css("pointer-events", "none");
   yellow.activate(playerTime);
   simonData.clickCount++;
-  $(".td").css("pointer-events", "none");
   checkGameStatus(simonData, yellow);
 });
 $(blueQuadrantIDs).click(function() {
+  $(".td").css("pointer-events", "none");
   blue.activate(playerTime);
   simonData.clickCount++;
-  $(".td").css("pointer-events", "none");
   checkGameStatus(simonData, blue);
 });
 
 function simonManager(s) {
-  $('#simon-play-svg').css('display', 'none');
-  setScore(s);
   $(".td").css("pointer-events", "none");
+  $('#simon-play-svg').css('display', 'none');
   resetData(s);
+  setScore(s);
   machineTurn(s);
 }
 
 function setScore(s) {
-  currentRound = s.machineStreak.length;
+  currentRound = s.machineStreak.length + 1;
+  console.log(currentRound);
   function n(n) {
     return n > 9 ? "" + n: "0" + n;
   }
