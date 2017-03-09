@@ -71,59 +71,72 @@ function playerTurn(s) {
 
 function checkGameStatus(s, quadrant) {
   if (s.machineStreak[s.clickCount - 1].colorName === quadrant.colorName) {
-    if(s.clickCount === s.maxTurns) {
-      document.getElementById('win').play();
-      $('.main__simon-bt-play').text('');
-      $('.main__simon-bt-play').append(playIcon);
-      $('html').css('backgroundImage', "url(http://res.cloudinary.com/dt4qeehms/image/upload/v1488934896/427118_1_n0wxq7.jpg)");
-      $('body').fadeOut("slow", function () {
-          $('body').css({display:"none"});
-      });
-      $('.main__simon-bt-play').css("pointer-events", "auto");
-      setTimeout(function () {
-        $('body').fadeIn("slow", function () {
-          $('body').css({display:"block"});
-        });
-        $('html').css('backgroundImage', "none");
-      }, machineTime * 7);
-      return;
-    } else {
-      $(".td").css("pointer-events", "auto");
-  }
-    s.playerStreak.push(quadrant);
-    if (s.machineStreak.length === s.clickCount) {
-      setTimeout(function () {
-        machineTurn(s);
-      }, playerTime / 2);
-    }
+    playerScore(s, quadrant);
   } else {
-      s.playerFail = true;
-      setTimeout(function () {
-        document.getElementById('lose').play();
-        green.activate(playerTime * 2, false);
-        red.activate(playerTime * 2, false);
-        yellow.activate(playerTime * 2, false);
-        blue.activate(playerTime * 2, false);
-
-        if ($('.main__simon-bt-mode').data('mode') === 'n') {
-          machineTurn(s);
-        } else {
-          setTimeout(function () {
-            $('.main__simon-bt-play').text('');
-            $('.main__simon-bt-play').append(playIcon);
-            $('.main__simon-bt-play').css("pointer-events", "auto");
-          }, machineTime * 2);
-          return;
-        }
-      }, playerTime * 1.5);
+      playerMistake(s);
     }
 }
 
+function playerScore(s, quadrant) {
+  if(s.clickCount === s.maxTurns) {
+    winEvent();
+    $('.main__simon-bt-play').css("pointer-events", "auto");
+    return;
+  } else {
+    $(".td").css("pointer-events", "auto");
+    }
+
+  s.playerStreak.push(quadrant);
+  if (s.machineStreak.length === s.clickCount) {
+    setTimeout(function () {
+      machineTurn(s);
+    }, playerTime / 2);
+  }
+}
+
+function winEvent() {
+  document.getElementById('win').play();
+  $('.main__simon-bt-play').text('');
+  $('.main__simon-bt-play').append(playIcon);
+  $('html').css('backgroundImage', "url(http://res.cloudinary.com/dt4qeehms/image/upload/v1488934896/427118_1_n0wxq7.jpg)");
+  $('body').fadeOut("slow", function () {
+      $('body').css({display:"none"});
+  });
+  setTimeout(function () {
+    $('body').fadeIn("slow", function () {
+      $('body').css({display:"block"});
+    });
+    $('html').css('backgroundImage', "none");
+  }, machineTime * 7);
+}
+
+function playerMistake(s) {
+  s.playerFail = true;
+  setTimeout(function () {
+    document.getElementById('lose').play();
+    green.activate(playerTime * 2, false);
+    red.activate(playerTime * 2, false);
+    yellow.activate(playerTime * 2, false);
+    blue.activate(playerTime * 2, false);
+
+    if ($('.main__simon-bt-mode').data('mode') === 'n') {
+      machineTurn(s);
+    } else {
+      setTimeout(function () {
+        $('.main__simon-bt-play').text('');
+        $('.main__simon-bt-play').append(playIcon);
+        $('.main__simon-bt-play').css("pointer-events", "auto");
+      }, machineTime * 2);
+      return;
+    }
+  }, playerTime * 1.5);
+}
+
 function machineTurn(s) {
-  setScore(s);
   setTimeout(function() {
     s.clickCount = 0;
     if(!s.playerFail) {
+      setScore(s);
       pushNewColor(s.machineStreak);
     }
     activateAllColorsStreak(s.machineStreak);
