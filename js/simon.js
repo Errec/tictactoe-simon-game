@@ -5,6 +5,7 @@ var blueQuadrantIDs   = '#td-44, #td-45, #td-46, #td-54, #td-55, #td-56, #td-64,
 var playIcon = '<svg id="simon-play-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 394.28572 455.28192" width="50%" height="50%"><path d="M354.286 227.641L20 420.641v-386z" fill="none" stroke="#45d655" stroke-width="40"/></svg>';
 var playerTime  = 230;
 var machineTime = 270;
+var alertAFK;
 var green  = new quadrant(greenQuadrantIDs,'green','#7BFF91','#45D655');
 var red    = new quadrant(redQuadrantIDs,'red','#F68163','#DC3B22');
 var yellow = new quadrant(yellowQuadrantIDs,'yellow','#FFFDA9','#E1D934');
@@ -17,30 +18,36 @@ $('.main__simon-bt-mode').click(function () {
   $('.main__simon-bt-play').text('');
   $('.main__simon-bt-play').append(playIcon);
   $('.main__simon-bt-play').css("pointer-events", "auto");
+  clearTimeout(alertAFK);
+  clearTimeout(pointerEventAutoTimer);
 });
 
 $(greenQuadrantIDs).click(function() {
   $(".td").css("pointer-events", "none");
   green.activate(playerTime);
   simonData.clickCount++;
+  clearTimeout(alertAFK);
   checkGameStatus(simonData, green);
 });
 $(redQuadrantIDs).click(function() {
   $(".td").css("pointer-events", "none");
   red.activate(playerTime);
   simonData.clickCount++;
+  clearTimeout(alertAFK);
   checkGameStatus(simonData, red);
 });
 $(yellowQuadrantIDs).click(function() {
   $(".td").css("pointer-events", "none");
   yellow.activate(playerTime);
   simonData.clickCount++;
+  clearTimeout(alertAFK);
   checkGameStatus(simonData, yellow);
 });
 $(blueQuadrantIDs).click(function() {
   $(".td").css("pointer-events", "none");
   blue.activate(playerTime);
   simonData.clickCount++;
+  clearTimeout(alertAFK);
   checkGameStatus(simonData, blue);
 });
 
@@ -54,7 +61,6 @@ function simonManager(s) {
 
 function setScore(s) {
   currentRound = s.machineStreak.length + 1;
-  console.log(currentRound);
   function n(n) {
     return n > 9 ? "" + n: "0" + n;
   }
@@ -62,11 +68,18 @@ function setScore(s) {
 }
 
 function playerTurn(s) {
+  setAFKCount(s);
   s.playerStreak  = [];
   s.playerFail = false;
   setTimeout(function() {
-    $(".td").css("pointer-events", "auto");
+    if ($('.main__simon-bt-play').text()) {
+      $(".td").css("pointer-events", "auto");
+    }
   }, machineTime * 2 * s.machineStreak.length);
+}
+
+function setAFKCount(s) {
+  alertAFK = setTimeout(function(){ playerMistake(s); }, 3000);
 }
 
 function checkGameStatus(s, quadrant) {
