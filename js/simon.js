@@ -6,10 +6,11 @@ var playIcon = '<svg id="simon-play-svg" xmlns="http://www.w3.org/2000/svg" view
 var playerTime  = 230;
 var machineTime = 270;
 var alertAFK;
-var green  = new quadrant(greenQuadrantIDs,'green','#7BFF91','#45D655');
-var red    = new quadrant(redQuadrantIDs,'red','#F68163','#DC3B22');
-var yellow = new quadrant(yellowQuadrantIDs,'yellow','#FFFDA9','#E1D934');
-var blue   = new quadrant(blueQuadrantIDs,'blue','#4FEEFF','#00A8F1');
+var afterClickAlertAFK;
+var green  = new Quadrant(greenQuadrantIDs,'green','#7BFF91','#45D655');
+var red    = new Quadrant(redQuadrantIDs,'red','#F68163','#DC3B22');
+var yellow = new Quadrant(yellowQuadrantIDs,'yellow','#FFFDA9','#E1D934');
+var blue   = new Quadrant(blueQuadrantIDs,'blue','#4FEEFF','#00A8F1');
 
 $('.main__simon-bt-mode').click(function () {
   resetData(simonData);
@@ -19,7 +20,7 @@ $('.main__simon-bt-mode').click(function () {
   $('.main__simon-bt-play').append(playIcon);
   $('.main__simon-bt-play').css("pointer-events", "auto");
   clearTimeout(alertAFK);
-  clearTimeout(pointerEventAutoTimer);
+  clearTimeout(afterClickAlertAFK);
 });
 
 $(greenQuadrantIDs).click(function() {
@@ -27,6 +28,8 @@ $(greenQuadrantIDs).click(function() {
   green.activate(playerTime);
   simonData.clickCount++;
   clearTimeout(alertAFK);
+  clearTimeout(afterClickAlertAFK);
+  afterClickAlertAFK = setTimeout(function(){ playerMistake(simonData); }, 5000);
   checkGameStatus(simonData, green);
 });
 $(redQuadrantIDs).click(function() {
@@ -34,6 +37,8 @@ $(redQuadrantIDs).click(function() {
   red.activate(playerTime);
   simonData.clickCount++;
   clearTimeout(alertAFK);
+  clearTimeout(afterClickAlertAFK);
+  afterClickAlertAFK = setTimeout(function(){ playerMistake(simonData); }, 5000);
   checkGameStatus(simonData, red);
 });
 $(yellowQuadrantIDs).click(function() {
@@ -41,6 +46,8 @@ $(yellowQuadrantIDs).click(function() {
   yellow.activate(playerTime);
   simonData.clickCount++;
   clearTimeout(alertAFK);
+  clearTimeout(afterClickAlertAFK);
+  afterClickAlertAFK = setTimeout(function(){ playerMistake(simonData); }, 5000);
   checkGameStatus(simonData, yellow);
 });
 $(blueQuadrantIDs).click(function() {
@@ -48,6 +55,8 @@ $(blueQuadrantIDs).click(function() {
   blue.activate(playerTime);
   simonData.clickCount++;
   clearTimeout(alertAFK);
+  clearTimeout(afterClickAlertAFK);
+  afterClickAlertAFK = setTimeout(function(){ playerMistake(simonData); }, 5000);
   checkGameStatus(simonData, blue);
 });
 
@@ -68,7 +77,7 @@ function setScore(s) {
 }
 
 function playerTurn(s) {
-  setAFKCount(s);
+  alertAFK = setTimeout(function(){ playerMistake(s); }, 5000);
   s.playerStreak  = [];
   s.playerFail = false;
   setTimeout(function() {
@@ -76,10 +85,6 @@ function playerTurn(s) {
       $(".td").css("pointer-events", "auto");
     }
   }, machineTime * 2 * s.machineStreak.length);
-}
-
-function setAFKCount(s) {
-  alertAFK = setTimeout(function(){ playerMistake(s); }, 3000);
 }
 
 function checkGameStatus(s, quadrant) {
@@ -124,6 +129,7 @@ function winEvent() {
 }
 
 function playerMistake(s) {
+  $(".td").css("pointer-events", "none");
   s.playerFail = true;
   setTimeout(function () {
     mistakeEvent();
@@ -151,6 +157,9 @@ function mistakeEvent() {
 }
 
 function machineTurn(s) {
+  $(".td").css("pointer-events", "none");
+  clearTimeout(afterClickAlertAFK);
+  clearTimeout(alertAFK);
   setTimeout(function() {
     s.clickCount = 0;
     if(!s.playerFail) {
@@ -167,7 +176,7 @@ function pushNewColor(streak) {
   streak.push(colors[Math.floor(Math.random()*colors.length)]);
 }
 
-function quadrant(IDs, colorName, hexLight, hexDark) {
+function Quadrant(IDs, colorName, hexLight, hexDark) {
   var that = this;
   this.IDs              = IDs;
   this.colorName        = colorName;
