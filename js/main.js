@@ -9,16 +9,17 @@
 
 var tttData = {
   openSpots    : 9,
-  xType: 'human',
-  oType: 'machine',
+  xType        : 'human',
+  oType        : 'machine',
   playerTurn   : 'x',
   playerXSpots : [],
   playerOSpots : [],
+  click        : false,
   score        : {
-    humanX: 0,
-    humanO: 0,
-    machineX: 0,
-    machineO: 0
+    humanX   : 0,
+    humanO   : 0,
+    machineX : 0,
+    machineO : 0
   }
 };
 
@@ -27,23 +28,45 @@ var simonData = {
   playerStreak  : [],
   playerFail    : false,
   clickCount    : 0,
-  maxTurns      : 3
+  maxTurns      : 3,
+  click         : false
 };
 
 $(document).ready(function() {
-  // simulate toggle btn
-  $('.ttt').hide();
-  $('.ttt-l').css('border-left', 'none');
-  $('.ttt-b').css('border-bottom', 'none');
-  $('.simon-l').css('border-left', 'solid black 5px');
-  $('.simon-b').css('border-bottom', 'solid black 5px');
-  $('.main__table').css('width', '300px').css('height', '300px');
-  $(".td").css("pointer-events", "none");
-
-  $('.td').click(function() {
+  $('.header__button').click(function () {
     if ($('.header__button').data('game') === 't') {
-      tttManager(tttData, this.id);
-    }
+      $('.header__button').data('game', 's');
+      $('.main').css('display', 'flex');
+      $('.ttt').hide();
+      $('.simon').show();
+      $('.ttt-l').css('border-left', 'none');
+      $('.ttt-b').css('border-bottom', 'none');
+      $('.simon-l').css('border-left', 'solid black 5px');
+      $('.simon-b').css('border-bottom', 'solid black 5px');
+      $('.main__table').css('width', '300px').css('height', '300px');
+      $(".td").css("pointer-events", "none");
+      $(greenQuadrantIDs).css('background-color', '#45D655');
+      $(redQuadrantIDs).css('background-color', '#DC3B22');
+      $(yellowQuadrantIDs).css('background-color', '#E1D934');
+      $(blueQuadrantIDs).css('background-color', '#00A8F1');
+      $('.td').off();
+      tttData.click = false;
+      simonOnClick(simonData);
+    } else {
+        $('.header__button').data('game', 't');
+        $('.main').css('display', 'flex');
+        $('.simon').hide();
+        $('.ttt').show();
+        $('.simon-l').css('border-left', 'none');
+        $('.simon-b').css('border-bottom', 'none');
+        $('.ttt-l').css('border-left', 'solid white 2px');
+        $('.ttt-b').css('border-bottom', 'solid white 2px');
+        $('.main__table').css('width', '220px').css('height', '220px');
+        $('.td').css('background-color', 'transparent');
+        $('.td').off();
+        simonData.click = false;
+        tttOnClick(tttData);
+      }
   });
 
   $('.main__simon-bt-play').click(function() {

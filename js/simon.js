@@ -2,7 +2,7 @@ var greenQuadrantIDs  = '#td-11, #td-12, #td-13, #td-21, #td-22, #td-23, #td-31,
 var redQuadrantIDs    = '#td-14, #td-15, #td-16, #td-24, #td-25, #td-26, #td-34, #td-35, #td-36';
 var yellowQuadrantIDs = '#td-41, #td-42, #td-43, #td-51, #td-52, #td-53, #td-61, #td-62, #td-63';
 var blueQuadrantIDs   = '#td-44, #td-45, #td-46, #td-54, #td-55, #td-56, #td-64, #td-65, #td-66';
-var playIcon = '<svg id="simon-play-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 394.28572 455.28192" width="50%" height="50%"><path d="M354.286 227.641L20 420.641v-386z" fill="none" stroke="#45d655" stroke-width="40"/></svg>';
+var playIcon = '<svg id="simon-play-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 394.28572 455.28192" width="65%" height="65%"><path d="M354.286 227.641L20 420.641v-386z" fill="none" stroke="#45d655" stroke-width="40"/></svg>';
 var playerTime  = 230;
 var machineTime = 270;
 var alertAFK;
@@ -13,7 +13,7 @@ var yellow = new Quadrant(yellowQuadrantIDs,'yellow','#FFFDA9','#E1D934');
 var blue   = new Quadrant(blueQuadrantIDs,'blue','#4FEEFF','#00A8F1');
 
 $('.main__simon-bt-mode').click(function () {
-  resetData(simonData);
+  resetSimonData(simonData);
   $(".td").css("pointer-events", "none");
   $('.main__simon-bt-mode').data('mode') === 's' ? $('.main__simon-bt-mode').data('mode' , 'n').text('N').css('color', '#00A8F1') : $('.main__simon-bt-mode').data('mode' , 's').text('S').css('color', '#DC3B22');
   $('.main__simon-bt-play').text('');
@@ -23,47 +23,52 @@ $('.main__simon-bt-mode').click(function () {
   clearTimeout(afterClickAlertAFK);
 });
 
-$(greenQuadrantIDs).click(function() {
-  $(".td").css("pointer-events", "none");
-  green.activate(playerTime);
-  simonData.clickCount++;
-  clearTimeout(alertAFK);
-  clearTimeout(afterClickAlertAFK);
-  afterClickAlertAFK = setTimeout(function(){ playerMistake(simonData); }, 5000);
-  checkGameStatus(simonData, green);
-});
-$(redQuadrantIDs).click(function() {
-  $(".td").css("pointer-events", "none");
-  red.activate(playerTime);
-  simonData.clickCount++;
-  clearTimeout(alertAFK);
-  clearTimeout(afterClickAlertAFK);
-  afterClickAlertAFK = setTimeout(function(){ playerMistake(simonData); }, 5000);
-  checkGameStatus(simonData, red);
-});
-$(yellowQuadrantIDs).click(function() {
-  $(".td").css("pointer-events", "none");
-  yellow.activate(playerTime);
-  simonData.clickCount++;
-  clearTimeout(alertAFK);
-  clearTimeout(afterClickAlertAFK);
-  afterClickAlertAFK = setTimeout(function(){ playerMistake(simonData); }, 5000);
-  checkGameStatus(simonData, yellow);
-});
-$(blueQuadrantIDs).click(function() {
-  $(".td").css("pointer-events", "none");
-  blue.activate(playerTime);
-  simonData.clickCount++;
-  clearTimeout(alertAFK);
-  clearTimeout(afterClickAlertAFK);
-  afterClickAlertAFK = setTimeout(function(){ playerMistake(simonData); }, 5000);
-  checkGameStatus(simonData, blue);
-});
+function simonOnClick(simonData) {
+  if (simonData.click === false) {
+    simonData.click = true;
+    $(greenQuadrantIDs).on('click', function() {
+      $(".td").css("pointer-events", "none");
+      green.activate(playerTime);
+      simonData.clickCount++;
+      clearTimeout(alertAFK);
+      clearTimeout(afterClickAlertAFK);
+      afterClickAlertAFK = setTimeout(function(){ playerMistake(simonData); }, 5000);
+      checkGameStatus(simonData, green);
+    });
+    $(redQuadrantIDs).on('click', function() {
+      $(".td").css("pointer-events", "none");
+      red.activate(playerTime);
+      simonData.clickCount++;
+      clearTimeout(alertAFK);
+      clearTimeout(afterClickAlertAFK);
+      afterClickAlertAFK = setTimeout(function(){ playerMistake(simonData); }, 5000);
+      checkGameStatus(simonData, red);
+    });
+    $(yellowQuadrantIDs).on('click', function() {
+      $(".td").css("pointer-events", "none");
+      yellow.activate(playerTime);
+      simonData.clickCount++;
+      clearTimeout(alertAFK);
+      clearTimeout(afterClickAlertAFK);
+      afterClickAlertAFK = setTimeout(function(){ playerMistake(simonData); }, 5000);
+      checkGameStatus(simonData, yellow);
+    });
+    $(blueQuadrantIDs).on('click', function() {
+      $(".td").css("pointer-events", "none");
+      blue.activate(playerTime);
+      simonData.clickCount++;
+      clearTimeout(alertAFK);
+      clearTimeout(afterClickAlertAFK);
+      afterClickAlertAFK = setTimeout(function(){ playerMistake(simonData); }, 5000);
+      checkGameStatus(simonData, blue);
+    });
+  }
+}
 
 function simonManager(s) {
   $(".td").css("pointer-events", "none");
   $('#simon-play-svg').css('display', 'none');
-  resetData(s);
+  resetSimonData(s);
   setScore(s);
   machineTurn(s);
 }
@@ -99,6 +104,8 @@ function playerScore(s, quadrant) {
   if(s.clickCount === s.maxTurns) {
     winEvent();
     $('.main__simon-bt-play').css("pointer-events", "auto");
+    clearTimeout(afterClickAlertAFK);
+    clearTimeout(alertAFK);
     return;
   } else {
     $(".td").css("pointer-events", "auto");
@@ -142,6 +149,8 @@ function playerMistake(s) {
         $('.main__simon-bt-play').text('');
         $('.main__simon-bt-play').append(playIcon);
         $('.main__simon-bt-play').css("pointer-events", "auto");
+        clearTimeout(afterClickAlertAFK);
+        clearTimeout(alertAFK);
       }, machineTime * 2);
       return;
     }
@@ -204,7 +213,7 @@ function activateAllColorsStreak(streak) {
   }
 }
 
-function resetData(s) {
+function resetSimonData(s) {
   s.machineStreak = [];
   s.playerStreak = [];
   s.clickCount = 0;

@@ -23,7 +23,7 @@ body
   margin: 0
 
 .main
-  display: flex
+  display: none
   align-items: center
   justify-content: center
   flex-direction: column
@@ -37,6 +37,7 @@ body
   width: 220px
   height: 220px
   font-size: 1.4em
+  margin-top: 5vh
 
 .td
   user-select: none
@@ -46,8 +47,10 @@ body
 .header
   text-align: center
   margin-right: 98px
-  margin-top: 5vh
   margin-bottom: 5vh
 
 .header__button
   position: absolute
+
+.simon, .ttt
+  display: none

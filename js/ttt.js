@@ -24,6 +24,15 @@ $('.main__ttt-bt-o').click(function() {
   checkForMachine(tttData);
 });
 
+function tttOnClick(tttData) {
+  if (tttData.click === false) {
+    tttData.click = true;
+    $('.td').on('click', function() {
+        tttManager(tttData, this.id);
+    });
+  }
+}
+
 function tttManager(t, clickedSpot) {
   $('.td').css('pointer-events', 'auto');
   var xsvg_1 = '<svg class= "ttt-svg x-svg" version="1.0" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="xMaxYMax" viewBox="0 0 3400 3400"><g class="svg-curve" id="';
@@ -161,6 +170,7 @@ function checkForWin(turn, playerArr, id) {
   }
   return win;
 }
+
 function updateScore(t) {
   $('.main__x-score').text(function () {
     var value;
@@ -190,7 +200,6 @@ function tttReset(t) {
     $('.td').css('pointer-events', 'auto');
     checkForMachine(tttData);
   }, 1000);
-
 }
 
 function checkForMachine (t) {
