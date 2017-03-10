@@ -113,14 +113,11 @@ function winEvent() {
 function playerMistake(s) {
   s.playerFail = true;
   setTimeout(function () {
-    document.getElementById('lose').play();
-    green.activate(playerTime * 2, false);
-    red.activate(playerTime * 2, false);
-    yellow.activate(playerTime * 2, false);
-    blue.activate(playerTime * 2, false);
-
+    mistakeEvent();
     if ($('.main__simon-bt-mode').data('mode') === 'n') {
+      setTimeout(function () {
       machineTurn(s);
+      }, machineTime * 2);
     } else {
       setTimeout(function () {
         $('.main__simon-bt-play').text('');
@@ -132,6 +129,14 @@ function playerMistake(s) {
   }, playerTime * 1.5);
 }
 
+function mistakeEvent() {
+  document.getElementById('lose').play();
+  green.activate(playerTime * 1.4, false);
+  red.activate(playerTime * 1.4, false);
+  yellow.activate(playerTime * 1.4, false);
+  blue.activate(playerTime * 1.4, false);
+}
+
 function machineTurn(s) {
   setTimeout(function() {
     s.clickCount = 0;
@@ -141,7 +146,7 @@ function machineTurn(s) {
     }
     activateAllColorsStreak(s.machineStreak);
     playerTurn(s);
-  }, machineTime * 3);
+  }, machineTime * 2);
 }
 
 function pushNewColor(streak) {
