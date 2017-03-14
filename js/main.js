@@ -35,37 +35,9 @@ var simonData = {
 $(document).ready(function() {
   $('.header__button').click(function () {
     if ($('.header__button').data('game') === 't') {
-      $('.header__button').data('game', 's');
-      $('.main').css('display', 'flex');
-      $('.ttt').hide();
-      $('.simon').show();
-      $('.ttt-l').css('border-left', 'none');
-      $('.ttt-b').css('border-bottom', 'none');
-      $('.simon-l').css('border-left', 'solid black 5px');
-      $('.simon-b').css('border-bottom', 'solid black 5px');
-      $('.main__table').css('width', '300px').css('height', '300px');
-      $(".td").css("pointer-events", "none");
-      $(greenQuadrantIDs).css('background-color', '#45D655');
-      $(redQuadrantIDs).css('background-color', '#DC3B22');
-      $(yellowQuadrantIDs).css('background-color', '#E1D934');
-      $(blueQuadrantIDs).css('background-color', '#00A8F1');
-      $('.td').off();
-      tttData.click = false;
-      simonOnClick(simonData);
+      displaySimon(tttData, simonData);
     } else {
-        $('.header__button').data('game', 't');
-        $('.main').css('display', 'flex');
-        $('.simon').hide();
-        $('.ttt').show();
-        $('.simon-l').css('border-left', 'none');
-        $('.simon-b').css('border-bottom', 'none');
-        $('.ttt-l').css('border-left', 'solid white 2px');
-        $('.ttt-b').css('border-bottom', 'solid white 2px');
-        $('.main__table').css('width', '220px').css('height', '220px');
-        $('.td').css('background-color', 'transparent');
-        $('.td').off();
-        simonData.click = false;
-        tttOnClick(tttData);
+        displayTTT(tttData, simonData);
       }
   });
 
@@ -75,3 +47,55 @@ $(document).ready(function() {
     simonManager(simonData);
   });
 });
+
+function displaySimon(tttData, simonData) {
+  $('.td').css('pointer-events', 'none');
+  tttData.openSpots    = 9;
+  tttData.playerTurn   = 'x';
+  tttData.playerXSpots = [];
+  tttData.playerOSpots = [];
+  tttData.click        = false;
+  $('.tr').find('.x').remove();
+  $('.tr').find('.o').remove();
+  $('.header__button').data('game', 's');
+  $('.main').css('display', 'flex');
+  $('.ttt').hide();
+  $('.simon').show();
+  $('.ttt-l').css('border-left', 'none');
+  $('.ttt-b').css('border-bottom', 'none');
+  $('.simon-l').css('border-left', 'solid black 5px');
+  $('.simon-b').css('border-bottom', 'solid black 5px');
+  $('.main__table').css('width', '300px').css('height', '300px');
+  $(greenQuadrantIDs).css('background-color', '#45D655');
+  $(redQuadrantIDs).css('background-color', '#DC3B22');
+  $(yellowQuadrantIDs).css('background-color', '#E1D934');
+  $(blueQuadrantIDs).css('background-color', '#00A8F1');
+  $('.td').off();
+  simonOnClick(simonData);
+}
+
+function displayTTT(tttData, simonData) {
+  simonData.machineStreak = [];
+  simonData.playerStreak  = [];
+  simonData.playerFail    = false;
+  simonData.clickCount    = 0;
+  simonData.maxTurns      = 3;
+  simonData.click         = false;
+  $(".td").css("pointer-events", "auto");
+  clearTimeout(afterClickAlertAFK);
+  clearTimeout(alertAFK);
+  $('.main__simon-bt-play').text('');
+  $('.main__simon-bt-play').append(playIcon);
+  $('.header__button').data('game', 't');
+  $('.main').css('display', 'flex');
+  $('.simon').hide();
+  $('.ttt').show();
+  $('.simon-l').css('border-left', 'none');
+  $('.simon-b').css('border-bottom', 'none');
+  $('.ttt-l').css('border-left', 'solid white 2px');
+  $('.ttt-b').css('border-bottom', 'solid white 2px');
+  $('.main__table').css('width', '220px').css('height', '220px');
+  $('.td').css('background-color', 'transparent');
+  $('.td').off();
+  tttOnClick(tttData);
+}
