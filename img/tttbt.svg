@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   id="svg2"
+   viewBox="0 0 205 205.00001"
+   height="205"
+   width="205">
+  <defs
+     id="defs4" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(-304.382,-192.38232)"
+     id="layer1">
+    <g
+       transform="translate(135.29763,0)"
+       id="g4238">
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#FFFFFF;stroke-width:10.00000095;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 232.4177,192.38231 0,205"
+         id="path4204" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#FFFFFF;stroke-width:10.00000095;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 310.75104,192.3823 0,205.00002"
+         id="path4204-3" />
+    </g>
+    <g
+       id="g4238-5"
+       transform="matrix(0,1,-1,0,701.76431,23.29794)">
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#FFFFFF;stroke-width:10.00000095;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 232.4177,192.38231 0,205"
+         id="path4204-6" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#FFFFFF;stroke-width:10.00000095;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 310.75104,192.3823 0,205.00002"
+         id="path4204-3-2" />
+    </g>
+  </g>
+</svg>

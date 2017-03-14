@@ -50,13 +50,19 @@ $(document).ready(function() {
 
 function displaySimon(tttData, simonData) {
   $('.td').css('pointer-events', 'none');
-  tttData.openSpots    = 9;
-  tttData.playerTurn   = 'x';
-  tttData.playerXSpots = [];
-  tttData.playerOSpots = [];
-  tttData.click        = false;
-  $('.tr').find('.x').remove();
-  $('.tr').find('.o').remove();
+  tttData.xType        = 'human';
+  tttData.oType        = 'machine';
+  setTimeout(function () {
+    tttData.openSpots    = 9;
+    tttData.playerTurn   = 'x';
+    tttData.playerXSpots = [];
+    tttData.playerOSpots = [];
+    tttData.click        = false;
+    $('.main__ttt-bt-x-img').attr('src', 'img/human.jpeg');
+    $('.main__ttt-bt-o-img').attr('src', 'img/pc.png');
+    $('.tr').find('.x').remove();
+    $('.tr').find('.o').remove();
+  }, 700);
   $('.header__button').data('game', 's');
   $('.main').css('display', 'flex');
   $('.ttt').hide();
