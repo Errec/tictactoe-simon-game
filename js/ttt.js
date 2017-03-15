@@ -13,7 +13,7 @@ $('.main__ttt-bt-x').click(function() {
   setTimeout(function() {
     checkForMachine(tttData);
     $('.ttt-bt').css('pointer-events', 'auto');
-  }, 1000);
+  }, 1200);
 });
 
 $('.main__ttt-bt-o').click(function() {
@@ -31,7 +31,7 @@ $('.main__ttt-bt-o').click(function() {
   setTimeout(function() {
     $('.ttt-bt').css('pointer-events', 'auto');
     checkForMachine(tttData);
-  }, 1000);
+  }, 1200);
 });
 
 function tttOnClick(tttData) {
