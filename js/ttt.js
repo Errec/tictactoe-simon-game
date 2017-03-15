@@ -8,7 +8,12 @@ $('.main__ttt-bt-x').click(function() {
     $('.main__ttt-bt-x-img').attr('src', 'img/human.jpeg');
     updateScore(tttData);
   }
-  checkForMachine(tttData);
+  $('.ttt-bt').css('pointer-events', 'none');
+  tttReset(tttData);
+  setTimeout(function() {
+    checkForMachine(tttData);
+    $('.ttt-bt').css('pointer-events', 'auto');
+  }, 1000);
 });
 
 $('.main__ttt-bt-o').click(function() {
@@ -21,7 +26,12 @@ $('.main__ttt-bt-o').click(function() {
     $('.main__ttt-bt-o-img').attr('src', 'img/human.jpeg');
     updateScore(tttData);
   }
-  checkForMachine(tttData);
+  $('.ttt-bt').css('pointer-events', 'none');
+  tttReset(tttData);
+  setTimeout(function() {
+    $('.ttt-bt').css('pointer-events', 'auto');
+    checkForMachine(tttData);
+  }, 1000);
 });
 
 function tttOnClick(tttData) {
