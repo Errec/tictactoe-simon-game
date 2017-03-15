@@ -94,6 +94,7 @@ function displayTTT(tttData, simonData) {
   clearTimeout(alertAFK);
   $('.main__simon-bt-play').text('');
   $('.main__simon-bt-play').append(playIcon);
+  $('.main__simon-bt-play').css("pointer-events", "auto");
   $('.header__button').data('game', 't');
   $('.main').css('display', 'flex');
   $('.simon').hide();
