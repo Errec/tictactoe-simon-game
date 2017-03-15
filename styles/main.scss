@@ -45,12 +45,21 @@ body
   transition: all 0.1s ease-in-out
 
 .header
+  margin-top: 10px
   text-align: center
-  margin-right: 98px
-  margin-bottom: 5vh
+  margin-right: 42px
+  margin-bottom: 12vh
 
 .header__button
   position: absolute
+  background-image: url(../img/tttbt.svg)
+  background-size: 90%
+  background-repeat: no-repeat
+  background-position: center
+  background-color: black
+  border: white 1px solid
+  height: 40px
+  width: 40px
 
 .simon, .ttt
   display: none

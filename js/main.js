@@ -49,6 +49,7 @@ $(document).ready(function() {
 });
 
 function displaySimon(tttData, simonData) {
+  $('.header__button').css('background-image','url(../img/tttbt.svg)');
   $('.td').css('pointer-events', 'none');
   tttData.xType        = 'human';
   tttData.oType        = 'machine';
@@ -81,6 +82,7 @@ function displaySimon(tttData, simonData) {
 }
 
 function displayTTT(tttData, simonData) {
+  $('.header__button').css('background-image','url(../img/simonbt.svg)');
   simonData.machineStreak = [];
   simonData.playerStreak  = [];
   simonData.playerFail    = false;
