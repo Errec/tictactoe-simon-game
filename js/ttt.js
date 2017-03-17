@@ -1,4 +1,10 @@
+var xTurn;
+var oTurn;
+
 $('.main__ttt-bt-x').click(function() {
+  $('.td').css('pointer-events', 'none');
+  clearTimeout(xTurn);
+  clearTimeout(oTurn);
   if (tttData.xType === 'human') {
     tttData.xType = 'machine';
     $('.main__ttt-bt-x-img').attr('src', 'img/pc.png');
@@ -9,14 +15,16 @@ $('.main__ttt-bt-x').click(function() {
     updateScore(tttData);
   }
   $('.ttt-bt').css('pointer-events', 'none');
-  tttReset(tttData);
   setTimeout(function() {
-    checkForMachine(tttData);
+    tttReset(tttData);
     $('.ttt-bt').css('pointer-events', 'auto');
   }, 1200);
 });
 
 $('.main__ttt-bt-o').click(function() {
+  $('.td').css('pointer-events', 'none');
+  clearTimeout(xTurn);
+  clearTimeout(oTurn);
   if (tttData.oType === 'human') {
     tttData.oType = 'machine';
     $('.main__ttt-bt-o-img').attr('src', 'img/pc.png');
@@ -27,10 +35,9 @@ $('.main__ttt-bt-o').click(function() {
     updateScore(tttData);
   }
   $('.ttt-bt').css('pointer-events', 'none');
-  tttReset(tttData);
   setTimeout(function() {
     $('.ttt-bt').css('pointer-events', 'auto');
-    checkForMachine(tttData);
+    tttReset(tttData);
   }, 1200);
 });
 
@@ -199,6 +206,8 @@ function updateScore(t) {
 }
 
 function tttReset(t) {
+  clearTimeout(xTurn);
+  clearTimeout(oTurn);
   $('.td').css('pointer-events', 'none');
   t.openSpots    = 9;
   t.playerTurn   = 'x';
@@ -215,13 +224,13 @@ function tttReset(t) {
 function checkForMachine (t) {
   if (t.playerTurn === 'x' && t.xType === 'machine') {
     $('.td').css('pointer-events', 'none');
-    setTimeout(function() {
+    xTurn = setTimeout(function() {
       tttManager(t, convertToTd(pickSpot(t, t.playerOSpots, t.playerXSpots)));
     }, 350);
   }
   if (t.playerTurn === 'o' && t.oType === 'machine') {
     $('.td').css('pointer-events', 'none');
-    setTimeout(function() {
+    oTurn = setTimeout(function() {
       tttManager(t, convertToTd(pickSpot(t, t.playerXSpots, t.playerOSpots)));
     }, 350);
   }
