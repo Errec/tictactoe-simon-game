@@ -18,6 +18,7 @@ html
   background-repeat: no-repeat;
 
 body
+  text-align: center
   background-color: black
   color: transparent
   margin: 0
@@ -51,15 +52,37 @@ body
   margin-bottom: 12vh
 
 .header__button
+  display: none
   position: absolute
+  top: 5vh
   background-image: url(../img/tttbt.svg)
-  background-size: 90%
-  background-repeat: no-repeat
-  background-position: center
-  background-color: black
-  border: white 1px solid
   height: 40px
   width: 40px
+
+.center-bt, .header__button
+  background-size: 90%
+  background-position: center
+  background-repeat: no-repeat
+  border: white 1px solid
+  background-color: black
+
+.center-bt
+  position: absolute
+  top: 35vh
+
+.btn-wrapper__left-bt
+  position: relative
+  margin-right: 4px
+  background-image: url(../img/tttbt.svg)
+  height: 80px
+  width: 80px
+
+.btn-wrapper__right-bt
+  position: relative
+  margin-left: 4px
+  background-image: url(../img/simonbt.svg)
+  height: 80px
+  width: 80px
 
 .simon, .ttt
   display: none

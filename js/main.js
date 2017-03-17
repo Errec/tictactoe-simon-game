@@ -51,8 +51,8 @@ $(document).ready(function() {
 function displaySimon(tttData, simonData) {
   $('.header__button').css('background-image','url(../img/tttbt.svg)');
   $('.td').css('pointer-events', 'none');
-  tttData.xType        = 'human';
-  tttData.oType        = 'machine';
+  tttData.xType = 'human';
+  tttData.oType = 'machine';
   setTimeout(function () {
     tttData.openSpots    = 9;
     tttData.playerTurn   = 'x';

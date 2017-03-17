@@ -14,6 +14,9 @@ html(lang="en")
   body
     header.header
       button.header__button(type="button" data-game="s")
+    div.btn-wrapper
+      button.btn-wrapper__left-bt.center-bt(type="button" data-game="s")
+      button.btn-wrapper__right-bt.center-bt(type="button" data-game="s")
     main.main
       table.main__table
         +table-maker(6,6)
