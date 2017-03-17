@@ -33,10 +33,26 @@ var simonData = {
 };
 
 $(document).ready(function() {
+  $('.btn-wrapper__left-bt').click(function() {
+    $('.btn-wrapper__left-bt').hide();
+    $('.btn-wrapper__right-bt').hide();
+    $('.header__button').css('background-image','url(../img/simonbt.svg)').show();
+    displayTTT(tttData, simonData);
+  });
+
+  $('.btn-wrapper__right-bt').click(function() {
+    $('.btn-wrapper__right-bt').hide();
+    $('.btn-wrapper__left-bt').hide();
+    $('.header__button').css('background-image','url(../img/tttbt.svg)').show();
+    displaySimon(tttData, simonData);
+  });
+
   $('.header__button').click(function () {
     if ($('.header__button').data('game') === 't') {
+      $('.header__button').css('background-image','url(../img/tttbt.svg)');
       displaySimon(tttData, simonData);
     } else {
+        $('.header__button').css('background-image','url(../img/simonbt.svg)');
         displayTTT(tttData, simonData);
       }
   });
@@ -49,7 +65,6 @@ $(document).ready(function() {
 });
 
 function displaySimon(tttData, simonData) {
-  $('.header__button').css('background-image','url(../img/tttbt.svg)');
   $('.td').css('pointer-events', 'none');
   tttData.xType = 'human';
   tttData.oType = 'machine';
@@ -82,7 +97,6 @@ function displaySimon(tttData, simonData) {
 }
 
 function displayTTT(tttData, simonData) {
-  $('.header__button').css('background-image','url(../img/simonbt.svg)');
   simonData.machineStreak = [];
   simonData.playerStreak  = [];
   simonData.playerFail    = false;
