@@ -33,33 +33,39 @@ var simonData = {
 };
 
 $(document).ready(function() {
-  $('.btn-wrapper__left-bt').click(function() {
-    $('.btn-wrapper__left-bt').hide();
-    $('.btn-wrapper__right-bt').hide();
-    $('.header__button').css('background-image','url(../img/simonbt.svg)').show();
+  $('.btn-wrapper__left-bt--click').on('click', function() {
+    $('.btn-wrapper__right-bt').addClass('header__button').removeClass('btn-wrapper__right-bt--click').css({top : '2vh', width: '40px', height: '40px'});
+    $('.btn-wrapper__left-bt--click').fadeOut(200);
     displayTTT(tttData, simonData);
+    setGameBtnClick();
+    $(this).data('game', 's');
   });
 
-  $('.btn-wrapper__right-bt').click(function() {
-    $('.btn-wrapper__right-bt').hide();
-    $('.btn-wrapper__left-bt').hide();
-    $('.header__button').css('background-image','url(../img/tttbt.svg)').show();
+  $('.btn-wrapper__right-bt--click').on('click', function() {
+    $('.btn-wrapper__left-bt').addClass('header__button').removeClass('btn-wrapper__left-bt--click').css({top : '2vh', width: '40px', height: '40px'});
+    $('.btn-wrapper__right-bt--click').fadeOut(200);
     displaySimon(tttData, simonData);
+    setGameBtnClick();
+    $(this).data('game', 't');
   });
 
-  $('.header__button').click(function () {
-    if ($('.header__button').data('game') === 't') {
-      $('.header__button').css('background-image','url(../img/tttbt.svg)');
-      displaySimon(tttData, simonData);
-    } else {
-        $('.header__button').css('background-image','url(../img/simonbt.svg)');
-        displayTTT(tttData, simonData);
-      }
-  });
+  function setGameBtnClick() {
+    $('.header__button').off();
+    $('.header__button').on('click', function () {
+      if ($(this).data('game') === 't') {
+        $(this).css('background-image','url(../img/tttbt.svg)');
+        displaySimon(tttData, simonData);
+      } else {
+          $(this).css('background-image','url(../img/simonbt.svg)');
+          displayTTT(tttData, simonData);
+        }
+    });
+  }
+
 
   $('.main__simon-bt-play').click(function() {
     $('#simon-play-svg').css('display', 'none');
-    $('.main__simon-bt-play').css("pointer-events", "none");
+    $(this).css("pointer-events", "none");
     simonManager(simonData);
   });
 });
@@ -81,8 +87,9 @@ function displaySimon(tttData, simonData) {
   }, 700);
   $('.header__button').data('game', 's');
   $('.main').css('display', 'flex');
-  $('.ttt').hide();
-  $('.simon').show();
+  $('.ttt').fadeOut(500);
+  $('.simon').fadeIn(500);
+  $('.main-wrapper').fadeIn(1200);
   $('.ttt-l').css('border-left', 'none');
   $('.ttt-b').css('border-bottom', 'none');
   $('.simon-l').css('border-left', 'solid black 5px');
@@ -111,8 +118,9 @@ function displayTTT(tttData, simonData) {
   $('.main__simon-bt-play').css("pointer-events", "auto");
   $('.header__button').data('game', 't');
   $('.main').css('display', 'flex');
-  $('.simon').hide();
-  $('.ttt').show();
+  $('.simon').fadeOut(500);
+  $('.ttt').fadeIn(500);
+  $('.main-wrapper').fadeIn(1500);
   $('.simon-l').css('border-left', 'none');
   $('.simon-b').css('border-bottom', 'none');
   $('.ttt-l').css('border-left', 'solid white 2px');

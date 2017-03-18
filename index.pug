@@ -12,30 +12,31 @@ html(lang="en")
     //[if lt IE 9]> <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script><script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script> <![endif]
 
   body
-    header.header
-      button.header__button(type="button" data-game="s")
     div.btn-wrapper
-      button.btn-wrapper__left-bt.center-bt(type="button" data-game="s")
-      button.btn-wrapper__right-bt.center-bt(type="button" data-game="s")
-    main.main
-      table.main__table
-        +table-maker(6,6)
-      div.ttt.main__ttt-btn-wrapper
-        button.ttt-bt.main__ttt-bt-x(type="button")
-          img.main__ttt-bt-x-img(src='img/human.jpeg')
-          p.main__x-score 00
-        button.ttt-bt.main__ttt-bt-o(type="button")
-          img.main__ttt-bt-o-img(src='img/pc.png')
-          p.main__o-score 00
-      div.ttt.main__ttt-xo-icons
-        div.main__x-icon
-          <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="xMaxYMax" viewBox="0 0 2569.9999 2565.0001"><g class="svg-curve" id="score-x" fill="#FFFFFF" stroke="none"><path d="M 220,2335 -5,2110 408,1697 820,1285 410,875 C 185,650 0,461 0,455 0,442 448,-6 454,0 c 3,3 186,186 408,407 222,222 411,403 418,403 8,0 198,-183 422,-407 l 408,-408 225,225 c 124,124 225,229 225,235 0,6 -185,195 -410,420 l -410,410 412,412 413,413 -225,225 c -124,124 -229,225 -235,225 -5,0 -193,-183 -417,-407 l -407,-407 -409,407 c -225,224 -413,407 -418,407 -5,0 -110,-101 -234,-225 z"/></g></svg>
-        div.main__o-icon
-          <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 2548.3409 2558.5636" preserveAspectRatio="xMaxYMax" ><g class="svg-curve" id="score-o" fill="#FFFFFF" stroke="none"><path d="m 1090,2545 c -52,-7 -140,-28 -195,-45 C 461,2361 137,2007 34,1560 9,1453 4,1182 24,1060 69,797 181,578 373,382 547,205 732,97 957,41 c 373,-93 758,-24 1069,191 91,62 265,241 326,333 146,224 208,437 208,716 0,278 -64,493 -214,718 -75,113 -239,278 -342,344 -282,182 -581,248 -914,202 z m 404,-331 c 289,-73 524,-261 651,-519 75,-153 90,-223 90,-415 0,-142 -3,-176 -23,-245 -96,-332 -364,-596 -691,-682 -133,-35 -325,-37 -456,-4 -297,72 -558,302 -674,593 -83,209 -80,471 7,696 96,249 347,477 612,555 119,36 110,35 274,36 104,1 166,-4 210,-15 z"/></g></svg>
-      div.simon.main__simon-btn-wrapper
-        button.simon-bt.main__simon-bt-play(id="test" type="button")
-          <svg id="simon-play-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 394.28572 455.28192" width="65%" height="65%"><path d="M354.286 227.641L20 420.641v-386z" fill="none" stroke="#45d655" stroke-width="40"/></svg>
-        button.simon-bt.main__simon-bt-mode(type="button" data-mode="n") N
+      div
+        button.btn-wrapper__left-bt.btn-wrapper__left-bt--click.center-bt(type="button" data-game="t")
+      div
+        button.btn-wrapper__right-bt.btn-wrapper__right-bt--click.center-bt(type="button" data-game="s")
+    div.main-wrapper
+      div.main
+        table.main__table
+          +table-maker(6,6)
+        div.ttt.main__ttt-btn-wrapper
+          button.ttt-bt.main__ttt-bt-x(type="button")
+            img.main__ttt-bt-x-img(src='img/human.jpeg')
+            p.main__x-score 00
+          button.ttt-bt.main__ttt-bt-o(type="button")
+            img.main__ttt-bt-o-img(src='img/pc.png')
+            p.main__o-score 00
+        div.ttt.main__ttt-xo-icons
+          div.main__x-icon
+            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="xMaxYMax" viewBox="0 0 2569.9999 2565.0001"><g class="svg-curve" id="score-x" fill="#FFFFFF" stroke="none"><path d="M 220,2335 -5,2110 408,1697 820,1285 410,875 C 185,650 0,461 0,455 0,442 448,-6 454,0 c 3,3 186,186 408,407 222,222 411,403 418,403 8,0 198,-183 422,-407 l 408,-408 225,225 c 124,124 225,229 225,235 0,6 -185,195 -410,420 l -410,410 412,412 413,413 -225,225 c -124,124 -229,225 -235,225 -5,0 -193,-183 -417,-407 l -407,-407 -409,407 c -225,224 -413,407 -418,407 -5,0 -110,-101 -234,-225 z"/></g></svg>
+          div.main__o-icon
+            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 2548.3409 2558.5636" preserveAspectRatio="xMaxYMax" ><g class="svg-curve" id="score-o" fill="#FFFFFF" stroke="none"><path d="m 1090,2545 c -52,-7 -140,-28 -195,-45 C 461,2361 137,2007 34,1560 9,1453 4,1182 24,1060 69,797 181,578 373,382 547,205 732,97 957,41 c 373,-93 758,-24 1069,191 91,62 265,241 326,333 146,224 208,437 208,716 0,278 -64,493 -214,718 -75,113 -239,278 -342,344 -282,182 -581,248 -914,202 z m 404,-331 c 289,-73 524,-261 651,-519 75,-153 90,-223 90,-415 0,-142 -3,-176 -23,-245 -96,-332 -364,-596 -691,-682 -133,-35 -325,-37 -456,-4 -297,72 -558,302 -674,593 -83,209 -80,471 7,696 96,249 347,477 612,555 119,36 110,35 274,36 104,1 166,-4 210,-15 z"/></g></svg>
+        div.simon.main__simon-btn-wrapper
+          button.simon-bt.main__simon-bt-play(id="test" type="button")
+            <svg id="simon-play-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 394.28572 455.28192" width="65%" height="65%"><path d="M354.286 227.641L20 420.641v-386z" fill="none" stroke="#45d655" stroke-width="40"/></svg>
+          button.simon-bt.main__simon-bt-mode(type="button" data-mode="n") N
 
   <audio src="https://s3.amazonaws.com/freecodecamp/simonSound1.mp3" id="red"></audio>
   <audio src="https://s3.amazonaws.com/freecodecamp/simonSound2.mp3" id="green"></audio>
