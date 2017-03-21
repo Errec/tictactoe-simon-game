@@ -1,7 +1,7 @@
 var allTds = [];
-$('td').each(function(){
-      allTds.push($(this).attr('id'));
-    });
+$('td').each(function()
+  {allTds.push($(this).attr('id'));
+});
 
 var winArr = [['T1', 'T2', 'T3'],
                 ['M1', 'M2', 'M3'],
@@ -128,11 +128,11 @@ function setGameBtnClick() {
     if ($(this).data('game') === 't') {
       $(this).css('background-image','url(../img/tttbt.svg)');
       transitionEffect();
-      displaySimon(tttData, simonData);
+      // displaySimon(tttData, simonData);
     } else {
         $(this).css('background-image','url(../img/simonbt.svg)');
         transitionEffect();
-        displayTTT(tttData, simonData);
+        // displayTTT(tttData, simonData);
       }
   });
 }
@@ -140,5 +140,12 @@ function setGameBtnClick() {
 function transitionEffect() {
   $('body').css("pointer-events", "none");
   $('.td').css("pointer-events", "none");
-    $('.main').fadeOut(1200);
+  //Shuffle Array
+  allTds = allTds.sort(function() { return 0.5 - Math.random(); });
+  for (var i = 0; i < allTds.length; i++) {
+    setTimeout(function(j) {
+      $('#' + allTds[j]).css("visibility", "hidden");
+    }, i * 30, i);
+  }
+    //$('.main').fadeOut(1200);
 }
