@@ -1,4 +1,9 @@
-  var winArr = [['T1', 'T2', 'T3'],
+var allTds = [];
+$('td').each(function(){
+      allTds.push($(this).attr('id'));
+    });
+
+var winArr = [['T1', 'T2', 'T3'],
                 ['M1', 'M2', 'M3'],
                 ['B1', 'B2', 'B3'],
                 ['T1', 'M2', 'B3'],
@@ -48,20 +53,6 @@ $(document).ready(function() {
     setGameBtnClick();
     $(this).data('game', 't');
   });
-
-  function setGameBtnClick() {
-    $('.header__button').off();
-    $('.header__button').on('click', function () {
-      if ($(this).data('game') === 't') {
-        $(this).css('background-image','url(../img/tttbt.svg)');
-        displaySimon(tttData, simonData);
-      } else {
-          $(this).css('background-image','url(../img/simonbt.svg)');
-          displayTTT(tttData, simonData);
-        }
-    });
-  }
-
 
   $('.main__simon-bt-play').click(function() {
     $('#simon-play-svg').css('display', 'none');
@@ -129,4 +120,25 @@ function displayTTT(tttData, simonData) {
   $('.td').css('background-color', 'transparent');
   $('.td').off();
   tttOnClick(tttData);
+}
+
+function setGameBtnClick() {
+  $('.header__button').off();
+  $('.header__button').on('click', function () {
+    if ($(this).data('game') === 't') {
+      $(this).css('background-image','url(../img/tttbt.svg)');
+      transitionEffect();
+      displaySimon(tttData, simonData);
+    } else {
+        $(this).css('background-image','url(../img/simonbt.svg)');
+        transitionEffect();
+        displayTTT(tttData, simonData);
+      }
+  });
+}
+
+function transitionEffect() {
+  $('body').css("pointer-events", "none");
+  $('.td').css("pointer-events", "none");
+    $('.main').fadeOut(1200);
 }
