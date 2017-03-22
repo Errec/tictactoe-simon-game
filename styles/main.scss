@@ -44,7 +44,7 @@ body
 .td
   user-select: none
   cursor: default
-  transition: position 0.1s ease-in-out, border 0.3s ease-in-out,
+  transition: position 0.1s ease-in-out, border 0.3s ease-in-out, background-color 0.3s ease-in-out
 
 .center-bt, .header__button
   background-size: 90%

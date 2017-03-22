@@ -127,7 +127,7 @@ function setGameBtnClick() {
   $('.header__button').on('click', function () {
     if ($(this).data('game') === 't') {
       $(this).css('background-image','url(../img/tttbt.svg)');
-      transitionEffect('simon-ttt');
+      transitionEffect('ttt-simon');
       setTimeout(function() {
         displaySimon(tttData, simonData);
       }, allTds.length * 40);
@@ -160,6 +160,7 @@ function transitionEffect(transitionType) {
         $(allTds.join(', ')).css('border', 'white 2px solid').css("visibility", "visible");
       }, allTds.length * 20);
       setTimeout(function() {
+        $('body').css("pointer-events", "auto");
         for (var i = 0; i < allTdsRdn.length; i++) {
           setTimeout(function(j) {
             $(allTdsRdn[j]).css('border', '');
@@ -167,10 +168,24 @@ function transitionEffect(transitionType) {
         }
       }, allTds.length * 40 + 200);
   } else {
-      for (var i = 0; i < allTdsRdn.length; i++) {
-        setTimeout(function(j) {
-          $(allTdsRdn[j]).css("visibility", "hidden");
-        }, i * 20, i);
+      if (transitionType === 'ttt-simon') {
+        for (var i = 0; i < allTdsRdn.length; i++) {
+          setTimeout(function(j) {
+            $(allTdsRdn[j]).css('border', 'white 2px solid');
+          }, i * 20, i);
+        }
+        setTimeout(function() {
+          $(greenQuadrantIDs).css('background-color', '#45D655');
+          $(redQuadrantIDs).css('background-color', '#DC3B22');
+          $(yellowQuadrantIDs).css('background-color', '#E1D934');
+          $(blueQuadrantIDs).css('background-color', '#00A8F1');
+        }, allTds.length * 20 - 200);
+        setTimeout(function() {
+          $('body').css("pointer-events", "auto");
+          $(allTds.join(', ')).css('border', '');
+          $('.ttt-l').css('border-left', 'none');
+          $('.ttt-b').css('border-bottom', 'none');
+        }, allTds.length * 20);
       }
     }
 
