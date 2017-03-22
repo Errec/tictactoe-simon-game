@@ -1,5 +1,6 @@
 var xTurn;
 var oTurn;
+var tttActiveClick;
 
 $('.main__ttt-bt-x').click(function() {
   $('.td').css('pointer-events', 'none');
@@ -216,8 +217,12 @@ function tttReset(t) {
   setTimeout(function() {
     $('.tr').find('.x').remove();
     $('.tr').find('.o').remove();
-    $('.td').css('pointer-events', 'auto');
     checkForMachine(tttData);
+  }, 1000);
+  tttActiveClick = setTimeout(function() {
+    if (t.xType === 'human') {
+      $('.td').css('pointer-events', 'auto');
+    }
   }, 1000);
 }
 

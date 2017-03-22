@@ -62,9 +62,10 @@ $(document).ready(function() {
 });
 
 function displaySimon(tttData, simonData) {
-  $('.td').css('pointer-events', 'none');
   tttData.xType = 'human';
   tttData.oType = 'machine';
+  $('.td').css('pointer-events', 'none');
+  clearTimeout(tttActiveClick);
   setTimeout(function () {
     tttData.openSpots    = 9;
     tttData.playerTurn   = 'x';
@@ -169,6 +170,10 @@ function transitionEffect(transitionType) {
       }, allTds.length * 40 + 200);
   } else {
       if (transitionType === 'ttt-simon') {
+        clearTimeout(xTurn);
+        clearTimeout(oTurn);
+        $('.tr').find('.x').remove();
+        $('.tr').find('.o').remove();
         for (var i = 0; i < allTdsRdn.length; i++) {
           setTimeout(function(j) {
             $(allTdsRdn[j]).css('border', 'white 2px solid');
