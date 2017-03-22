@@ -1,16 +1,16 @@
 var allTds = [];
-$('td').each(function()
-  {allTds.push($(this).attr('id'));
+$('td').each(function() {
+  allTds.push('#' + $(this).attr('id'));
 });
 
 var winArr = [['T1', 'T2', 'T3'],
-                ['M1', 'M2', 'M3'],
-                ['B1', 'B2', 'B3'],
-                ['T1', 'M2', 'B3'],
-                ['T1', 'M1', 'B1'],
-                ['T2', 'M2', 'B2'],
-                ['T3', 'M3', 'B3'],
-                ['B1', 'M2', 'T3']];
+              ['M1', 'M2', 'M3'],
+              ['B1', 'B2', 'B3'],
+              ['T1', 'M2', 'B3'],
+              ['T1', 'M1', 'B1'],
+              ['T2', 'M2', 'B2'],
+              ['T3', 'M3', 'B3'],
+              ['B1', 'M2', 'T3']];
 
 var tttData = {
   openSpots    : 9,
@@ -109,9 +109,6 @@ function displayTTT(tttData, simonData) {
   $('.main__simon-bt-play').css("pointer-events", "auto");
   $('.header__button').data('game', 't');
   $('.main').css('display', 'flex');
-  $('.simon').fadeOut(500);
-  $('.ttt').fadeIn(500);
-  $('.main-wrapper').fadeIn(1500);
   $('.simon-l').css('border-left', 'none');
   $('.simon-b').css('border-bottom', 'none');
   $('.ttt-l').css('border-left', 'solid white 2px');
@@ -119,6 +116,9 @@ function displayTTT(tttData, simonData) {
   $('.main__table').css('width', '220px').css('height', '220px');
   $('.td').css('background-color', 'transparent');
   $('.td').off();
+  $('.simon').fadeOut(500);
+  $('.ttt').fadeIn(500);
+  $('.main-wrapper').fadeIn(1500);
   tttOnClick(tttData);
 }
 
@@ -127,25 +127,53 @@ function setGameBtnClick() {
   $('.header__button').on('click', function () {
     if ($(this).data('game') === 't') {
       $(this).css('background-image','url(../img/tttbt.svg)');
-      transitionEffect();
-      // displaySimon(tttData, simonData);
+      transitionEffect('simon-ttt');
+      setTimeout(function() {
+        displaySimon(tttData, simonData);
+      }, allTds.length * 40);
     } else {
         $(this).css('background-image','url(../img/simonbt.svg)');
-        transitionEffect();
-        // displayTTT(tttData, simonData);
+        transitionEffect('simon-ttt');
+        setTimeout(function() {
+          displayTTT(tttData, simonData);
+        }, allTds.length * 40);
       }
   });
 }
 
-function transitionEffect() {
+function transitionEffect(transitionType) {
   $('body').css("pointer-events", "none");
   $('.td').css("pointer-events", "none");
   //Shuffle Array
-  allTds = allTds.sort(function() { return 0.5 - Math.random(); });
-  for (var i = 0; i < allTds.length; i++) {
-    setTimeout(function(j) {
-      $('#' + allTds[j]).css("visibility", "hidden");
-    }, i * 30, i);
-  }
+  allTdsRdn = allTds.sort(function() {
+    return 0.5 - Math.random();
+  });
+
+  if (transitionType === 'simon-ttt') {
+      for (var i = 0; i < allTdsRdn.length; i++) {
+        setTimeout(function(j) {
+          $(allTdsRdn[j]).css("visibility", "hidden");
+        }, i * 20, i);
+      }
+      setTimeout(function() {
+        $('.td').css('background-color', 'transparent');
+        $(allTds.join(', ')).css('border', 'white 2px solid').css("visibility", "visible");
+      }, allTds.length * 20);
+      setTimeout(function() {
+        for (var i = 0; i < allTdsRdn.length; i++) {
+          setTimeout(function(j) {
+            $(allTdsRdn[j]).css('border', '');
+          }, i * 20, i);
+        }
+      }, allTds.length * 40 + 200);
+  } else {
+      for (var i = 0; i < allTdsRdn.length; i++) {
+        setTimeout(function(j) {
+          $(allTdsRdn[j]).css("visibility", "hidden");
+        }, i * 20, i);
+      }
+    }
+
+
     //$('.main').fadeOut(1200);
 }

@@ -39,11 +39,12 @@ body
   height: 220px
   font-size: 1.4em
   margin-top: 10vh
+  transition: width 0.3s ease-in-out, height 0.3s ease-in-out
 
 .td
   user-select: none
   cursor: default
-  transition: all 0.1s ease-in-out
+  transition: position 0.1s ease-in-out, border 0.3s ease-in-out,
 
 .center-bt, .header__button
   background-size: 90%
@@ -53,7 +54,6 @@ body
   background-color: black
   position: absolute
   top: 35vh
-  transition: width 0.5s ease-in-out
   transition: top 0.5s ease-in-out
 
 .btn-wrapper__left-bt
