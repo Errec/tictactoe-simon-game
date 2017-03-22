@@ -82,10 +82,10 @@ function setScore(s) {
 }
 
 function playerTurn(s) {
-  alertAFK = setTimeout(function(){ playerMistake(s); }, 5000);
   s.playerStreak  = [];
   s.playerFail = false;
   setTimeout(function() {
+    alertAFK = setTimeout(function(){ playerMistake(s); }, 5000);
     if ($('.main__simon-bt-play').text()) {
       $(".td").css("pointer-events", "auto");
     }

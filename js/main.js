@@ -33,7 +33,7 @@ var simonData = {
   playerStreak  : [],
   playerFail    : false,
   clickCount    : 0,
-  maxTurns      : 2,
+  maxTurns      : 10,
   click         : false
 };
 
