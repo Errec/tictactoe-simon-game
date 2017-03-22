@@ -123,15 +123,15 @@ function winEvent() {
   document.getElementById('win').play();
   $('.main__simon-bt-play').text('');
   $('.main__simon-bt-play').append(playIcon);
-  $('html').css('backgroundImage', "url(http://res.cloudinary.com/dt4qeehms/image/upload/v1488934896/427118_1_n0wxq7.jpg)");
-  $('body').fadeOut("slow", function () {
-      $('body').css({display:"none"});
+  $('body').css('backgroundImage', "url(http://res.cloudinary.com/dt4qeehms/image/upload/v1488934896/427118_1_n0wxq7.jpg)");
+  $('.game-container').fadeOut("slow", function () {
+      $('.game-container').css({display:"none"});
   });
   setTimeout(function () {
-    $('body').fadeIn("slow", function () {
-      $('body').css({display:"block"});
+    $('.game-container').fadeIn("slow", function () {
+      $('.game-container').css({display:"block"});
     });
-    $('html').css('backgroundImage', "none");
+    $('body').css('backgroundImage', "none");
   }, machineTime * 7);
 }
 
