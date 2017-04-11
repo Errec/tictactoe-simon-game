@@ -100,7 +100,6 @@ function displayTTT(tttData, simonData) {
   simonData.playerStreak  = [];
   simonData.playerFail    = false;
   simonData.clickCount    = 0;
-  simonData.maxTurns      = 3;
   simonData.click         = false;
   $(".td").css("pointer-events", "auto");
   clearTimeout(afterClickAlertAFK);
